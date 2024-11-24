@@ -20,12 +20,10 @@ export default function SignupPage() {
         });
         if(res.ok){
             // tell user to check their email
-            router.push('/signup/verifyemail');
+            router.push('/');
         }
     }
-    useEffect(() => {
-        router.prefetch('/signup/verifyemail');
-    },[router])
+
     return (
         <form className={styles.signupForm}
             onSubmit={e => handleSignup(e)}

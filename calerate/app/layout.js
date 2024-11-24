@@ -1,3 +1,4 @@
+import NavBar from "./components/(NavBar)/NavBar";
 import "./globals.scss";
 
 
@@ -9,8 +10,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <script src="https://accounts.google.com/gsi/client" async></script>
       <body>
+        <NavBar />
         {children}
       </body>
     </html>

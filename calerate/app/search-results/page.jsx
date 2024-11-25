@@ -1,8 +1,61 @@
-export default function SearchResults({searchParams}) {
-    return(
-        <div>
-            <h1>Search Results</h1>
-            <p>Query: {searchParams.query}</p>
+import { Suspense } from "react";
+import FoodSearchResult from "../components/FoodSearchResult/FoodSearchResult";
+import styles from "./SearchResults.module.scss";
+
+async function fetchSearchResults(query) {
+    console.log('searching for', query);
+    const apiKey = process.env.DATA_GOV_API_KEY;
+    const apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${apiKey}`;
+
+    const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            query,
+            pageSize: 25,
+            sortBy: 'dataType.keyword',
+            sortOrder: 'asc',
+        }),
+        next: { revalidate: 60 }, // Cache the data for 60 seconds
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch search results');
+    }
+
+    return response.json();
+}
+
+
+export default async function SearchResults({ searchParams }) {
+    const query = searchParams.query || '';
+
+    // Fetch search results at the top level
+    const searchResults = await fetchSearchResults(query);
+    console.log('searchResults', searchResults);
+
+    return (
+        <div className={styles.searchResults}>
+            <h1>Search Results for "{query}"</h1>
+            <Suspense fallback={<h3>Loading</h3>}>
+                {/* Resolve the promise returned by fetchSearchResults */}
+                <Results results={await searchResults} />
+            </Suspense>
         </div>
-    )
+    );
+}
+
+function Results({ results }) {
+    //console.log("Results", results);
+    if (!results.foods || results.foods.length === 0) {
+        return <p>No results found.</p>;
+    }
+
+    return (
+        <ul>
+            {results.foods.map((food) => (
+                <FoodSearchResult food={food} key={food.fdcId} />
+            ))}
+        </ul>
+    );
 }

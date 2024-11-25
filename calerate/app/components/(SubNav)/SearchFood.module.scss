@@ -1,0 +1,48 @@
+.searchFood {
+    font-family: Helvetica, sans-serif;
+    background-color: white;
+    border-radius: 19px;
+    outline: 1.5px solid rgb(67, 67, 255);
+    height: 39px;
+    color: white;
+    margin: 8px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:focus, &:focus-within{
+        box-shadow: 0px 0px 7px 0px rgba(67, 67, 255, 0.6);
+    }
+    transition: box-shadow 0.08s ease-out;
+    input {
+        flex-grow: 1;
+        border: none;
+        background-color: transparent;
+        height: 100%;
+        border-top-left-radius: 19px;
+        border-bottom-left-radius: 19px;
+        &:focus-visible {
+            outline: none;
+        }
+        padding-left: 10px;
+        padding-right: 6px;
+    }
+
+    button {
+        width: 42px;
+        height: 100%;
+        padding: none;
+        border-top-right-radius: 19px;
+        border-bottom-right-radius: 19px;
+        outline: none;
+        border: none;
+        background: lighten(rgb(63, 94, 251), 20%);
+        display: grid;
+        place-items: center;
+        svg{
+            filter: invert(100%);
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

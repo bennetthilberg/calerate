@@ -65,6 +65,15 @@
             height: 18px;
         }
     }
+    .logButton{
+        display: grid;
+        place-items: center;
+        .checkIcon{
+            width: 33px;
+            height: 33px;
+
+        }
+    }
 }
 @keyframes fadeIn{
     from{

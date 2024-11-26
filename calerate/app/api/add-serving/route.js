@@ -62,7 +62,7 @@ export async function POST(req) {
         const { data: updatedDayData, error: updatedDayError } = await supabase
             .from('days')
             .update({
-                total_calories: currentCalories + calories
+                total_calories: (currentCalories + calories).toFixed(1)
             })
             .eq('id', today.id)
             .select('*');

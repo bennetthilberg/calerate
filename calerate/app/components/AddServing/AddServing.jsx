@@ -22,6 +22,7 @@ export default function AddServing({ food, titleCaseDescription }) {
     }, [servingSizeValue]);
     async function handleLog(e) {
         e.preventDefault();
+        setAdding(true);
         const res = await fetch('/api/add-serving', {
             method: "POST",
             headers: {
@@ -36,7 +37,16 @@ export default function AddServing({ food, titleCaseDescription }) {
                 // here in the future
             })
         })
-
+        if(res.ok) {
+            setAdding(false);
+            setSuccess(true);
+            setTimeout(() => {
+                setSuccess(false);
+            }, 750);
+        } else{
+            console.error('Failed to log serving');
+            setAdding(false);
+        }
 
     }
     return (
@@ -73,12 +83,12 @@ export default function AddServing({ food, titleCaseDescription }) {
                             />
                             <span>g</span>
                         </span>
-                        <button type="submit">
+                        <button class={styles.logButton} type="submit">
                             {
-                                adding && <ClipLoader color="#fff" size={20} />
+                                adding && <ClipLoader className={styles.spinner} speedMultiplier={1.4} color="blue" size={21.25} />
                             }
                             {
-                                success && <CheckIcon />
+                                success && <CheckIcon color="green" className={styles.checkIcon} />
                             }
                             {
                                 !adding && !success && 'Log'

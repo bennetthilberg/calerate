@@ -1,11 +1,15 @@
+import AddServing from "../AddServing/AddServing";
 import styles from "./FoodSearchResult.module.scss";
 
 export default function FoodSearchResult({ food }) {
     function calculateCaloriesPer100g() {
-        const energy = food.foodNutrients.find(nutrient => nutrient.nutrientName === "Energy" && nutrient.unitName === "KCAL");
-        const servingSize = food.servingSize;
-        const servingSizeUnit = food.servingSizeUnit; // almost always "g"
-        const energyValue = energy.value; // an amount of calories in some amount of the food
+        const energy = food?.foodNutrients.find(nutrient => nutrient.nutrientName === "Energy" && nutrient.unitName === "KCAL");
+        const servingSize = food?.servingSize;
+        const servingSizeUnit = food?.servingSizeUnit; // almost always "g"
+        const energyValue = energy?.value; // an amount of calories in some amount of the food
+        if (!energy || !servingSize || !servingSizeUnit || !energyValue) {
+            return null;
+        }
         if (servingSizeUnit !== "g") {
             return null; // just wont display these. they are rare
         }
@@ -31,6 +35,13 @@ export default function FoodSearchResult({ food }) {
         'at', 'by', 'from', 'in', 'into', 'of', 'off', 'on', 'onto',
     ]
     function getTitleCase() {
+        if (!food?.description ||
+            typeof food.description !== 'string' ||
+            food.description.length < 1 ||
+            food.description == ' '
+        ) {
+            return null;
+        }
         const words = food.description.split(" ");
         const titleCased = words.map(word => {
             if (acronyms.includes(word.toUpperCase())) {
@@ -39,6 +50,7 @@ export default function FoodSearchResult({ food }) {
             if (smallWords.includes(word.toLowerCase())) {
                 return word.toLowerCase();
             }
+            if (!word[0]) return '';
             return word[0].toUpperCase() + word.slice(1).toLowerCase();
         });
         return titleCased.join(' ');
@@ -51,9 +63,13 @@ export default function FoodSearchResult({ food }) {
             <p>
                 <span className="bold">{Math.round(calsPer100g)}</span> calories per 100g
             </p>
-            <button>
-                Add
-            </button>
+            <AddServing food={
+                {
+                    ...food,
+                    calsPer100g,
+                    titleCaseDescription: titleCase
+                }
+            } />
         </div>
     )
 }

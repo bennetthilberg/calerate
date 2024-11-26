@@ -33,29 +33,23 @@ export default async function SearchResults({ searchParams }) {
     // Fetch search results at the top level
     const searchResults = await fetchSearchResults(query);
     console.log('searchResults', searchResults);
-
-    return (
-        <div className={styles.searchResults}>
-            <h1>Search Results for "{query}"</h1>
-            <Suspense fallback={<h3>Loading</h3>}>
-                {/* Resolve the promise returned by fetchSearchResults */}
-                <Results results={await searchResults} />
-            </Suspense>
-        </div>
-    );
-}
-
-function Results({ results }) {
-    //console.log("Results", results);
-    if (!results.foods || results.foods.length === 0) {
+    if (!searchResults.foods || searchResults.foods.length === 0) {
         return <p>No results found.</p>;
     }
-
     return (
-        <ul>
-            {results.foods.map((food) => (
-                <FoodSearchResult food={food} key={food.fdcId} />
-            ))}
-        </ul>
+        <>
+            <div className={styles.searchResults}>
+                <h1>Search Results for "{query}"</h1>
+                <Suspense fallback={<h3>Loading</h3>}>
+                    <ul>
+                        {searchResults.foods.map((food) => (
+                            <FoodSearchResult food={food} key={food.fdcId} />
+                        ))}
+                    </ul>
+                </Suspense>
+            </div >
+        </>
     );
+
+
 }

@@ -4,17 +4,20 @@ import { useRouter, useSearchParams } from "next/navigation"; // New import for 
 import styles from "./SearchFood.module.scss";
 import { PlusIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
-export default function SearchFood({initialQuery}) {
+export default function SearchFood({ initialQuery }) {
     const [searchValue, setSearchValue] = useState("");
     const [isTyping, setIsTyping] = useState(initialQuery);
     const router = useRouter();
     const debounceTimeout = useRef(null); // To manage debouncing
+    const [searching, setSearching] = useState(false);
 
     useEffect(() => {
         // Prefetch the search results page on component mount
         router.prefetch('/search-results');
     }, [router]);
-    
+    useEffect(() => {
+        setSearching(false);
+    }, [])
 
 
     function handleSearchChange(e) {
@@ -22,6 +25,7 @@ export default function SearchFood({initialQuery}) {
         const value = e.target.value;
         setSearchValue(value);
         router.prefetch(`/search-results?query=${value}`); // Prefetch the results page
+        router.push(`/search-results?query=${value}`); // Navigate to search results
         // Prefetch search results with debouncing
         /*
         setIsTyping(true);
@@ -37,6 +41,7 @@ export default function SearchFood({initialQuery}) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        //setSearching(true);
         if (searchValue.trim()) {
             router.push(`/search-results?query=${searchValue}`); // Navigate to search results
         }

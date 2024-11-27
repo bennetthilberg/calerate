@@ -51,7 +51,8 @@ export async function POST(req) {
                 name: name,
                 //amount_unit: food.servingSizeUnit
                 amount_unit: 'g',
-                calories: calories.toFixed(1)
+                calories: calories.toFixed(1),
+                calories_per_100g: food.calsPer100g
             })
             .select('*');
         if (servingError) throw servingError;

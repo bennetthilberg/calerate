@@ -1,0 +1,23 @@
+.servingItem{
+    padding: 10px;
+    border: 1.5px solid grey;
+    border-radius: 5px;
+    display: flex;
+    .actions, .info{
+        flex-grow: 1;
+        display: flex;
+        //align-items: center;
+    }
+    .info{
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .actions{
+        gap: 16px;
+        align-items: center;
+        button{
+            height: 40px;
+            padding: 0 10px;
+        }
+    }
+}

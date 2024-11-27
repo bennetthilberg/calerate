@@ -11,6 +11,7 @@ export default function AddServing({ food, titleCaseDescription }) {
     const [adding, setAdding] = useState(false);
     const [success, setSuccess] = useState(false);
     const [open, setOpen] = useState(false);
+    const [logOk, setLogOk] = useState(false);
     useEffect(() => {
         if (food && servingSizeValue) {
             const calsPer100g = food.calsPer100g;
@@ -21,8 +22,23 @@ export default function AddServing({ food, titleCaseDescription }) {
             setTotalCalories(0);
         }
     }, [servingSizeValue]);
+    useEffect(() => {
+        if (servingSizeValue && !isNaN(servingSizeValue) && servingSizeValue > 0) {
+            setLogOk(true);
+        }
+        else {
+            setLogOk(false);
+        }
+    }, [servingSizeValue])
+    function handleServingSizeChange(e) {
+        if (/[^0-9.]/.test(e.target.value)) {
+            return;
+        }
+        setServingSizeValue(e.target.value);
+    }
     async function handleLog(e) {
         e.preventDefault();
+        if(!logOk) return;
         setAdding(true);
         const res = await fetch('/api/add-serving', {
             method: "POST",
@@ -33,7 +49,8 @@ export default function AddServing({ food, titleCaseDescription }) {
                 food,
                 servingSizeValue,
                 calories: totalCalories,
-                name: food.titleCaseDescription
+                name: food.titleCaseDescription,
+                calsPer100g: food.calsPer100g
                 // we'll assume it's always grams, but could pass other units
                 // here in the future
             })
@@ -77,15 +94,18 @@ export default function AddServing({ food, titleCaseDescription }) {
                             {Math.round(totalCalories)} calories
                         </p>
                         <span className={styles.addInputHolder}>
-                            <input type="text"
+                            <input type="tel"
                                 value={servingSizeValue}
                                 autoFocus
-                                onChange={e => setServingSizeValue(e.target.value)}
+                                onChange={e => handleServingSizeChange(e)}
                                 maxLength={6}
                             />
                             <span>g</span>
                         </span>
-                        <button className={styles.logButton} type="submit">
+                        <button
+                            data-available={logOk}
+                            className={styles.logButton}
+                            type="submit">
                             {
                                 adding && <ClipLoader className={styles.spinner} speedMultiplier={1.4} color="blue" size={21.25} />
                             }

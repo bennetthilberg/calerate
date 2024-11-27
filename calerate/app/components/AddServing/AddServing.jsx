@@ -10,6 +10,7 @@ export default function AddServing({ food, titleCaseDescription }) {
     const [totalCalories, setTotalCalories] = useState(0);
     const [adding, setAdding] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [open, setOpen] = useState(false);
     useEffect(() => {
         if (food && servingSizeValue) {
             const calsPer100g = food.calsPer100g;
@@ -37,20 +38,21 @@ export default function AddServing({ food, titleCaseDescription }) {
                 // here in the future
             })
         })
-        if(res.ok) {
+        if (res.ok) {
             setAdding(false);
             setSuccess(true);
             setTimeout(() => {
                 setSuccess(false);
-            }, 750);
-        } else{
+                setOpen(false);
+            }, 600);
+        } else {
             console.error('Failed to log serving');
             setAdding(false);
         }
 
     }
     return (
-        <Dialog.Root>
+        <Dialog.Root open={open} onOpenChange={() => setOpen(!open)}>
             <Dialog.Trigger asChild>
                 <button>
                     Add
@@ -83,7 +85,7 @@ export default function AddServing({ food, titleCaseDescription }) {
                             />
                             <span>g</span>
                         </span>
-                        <button class={styles.logButton} type="submit">
+                        <button className={styles.logButton} type="submit">
                             {
                                 adding && <ClipLoader className={styles.spinner} speedMultiplier={1.4} color="blue" size={21.25} />
                             }

@@ -58,6 +58,7 @@ export async function POST(req) {
 
 
         // update today's total calories
+        /*
         const currentCalories = today.total_calories ?? 0;
         const { data: updatedDayData, error: updatedDayError } = await supabase
             .from('days')
@@ -67,6 +68,8 @@ export async function POST(req) {
             .eq('id', today.id)
             .select('*');
         if (updatedDayError) throw updatedDayError;
+        */
+       // this is handled by the trigger in the database now
 
 
     } catch (error) {

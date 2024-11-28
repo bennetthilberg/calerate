@@ -4,6 +4,8 @@ import styles from './AddServing.module.scss';
 import { useEffect, useState } from "react";
 import { Cross1Icon, CheckIcon } from "@radix-ui/react-icons";
 import { ClipLoader } from "react-spinners";
+import { useRouter } from "next/navigation";
+//import { addServingAction } from "./actions";
 
 export default function AddServing({ food, titleCaseDescription }) {
     const [servingSizeValue, setServingSizeValue] = useState('');
@@ -12,6 +14,7 @@ export default function AddServing({ food, titleCaseDescription }) {
     const [success, setSuccess] = useState(false);
     const [open, setOpen] = useState(false);
     const [logOk, setLogOk] = useState(false);
+    const router = useRouter();
     useEffect(() => {
         if (food && servingSizeValue) {
             const calsPer100g = food.calsPer100g;
@@ -56,6 +59,7 @@ export default function AddServing({ food, titleCaseDescription }) {
             })
         })
         if (res.ok) {
+            router.refresh();
             setAdding(false);
             setSuccess(true);
             setTimeout(() => {

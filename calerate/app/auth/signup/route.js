@@ -26,6 +26,6 @@ export async function POST(req) {
     if(dbError){
         return NextResponse.json({ error: dbError.message }, { status: 400 });
     }
-
+    
     return NextResponse.json({ message: 'Sign-up successful! Please check your email to verify your account.' }, { status: 200 });
 }

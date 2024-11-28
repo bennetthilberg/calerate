@@ -20,7 +20,7 @@ export async function POST(req) {
     const { data: userData } = await supabase.auth.getUser();
     const user = userData.user;
     const currentDate = new Date().toISOString().split('T')[0];
-    console.log("user:", user);
+    //console.log("user:", user);
     let today;
     try {
         const { data: daysData, error: daysError } = await supabase
@@ -81,7 +81,7 @@ export async function POST(req) {
             headers: { 'Content-Type': 'application/json' }
         });
     }
-    revalidatePath('/');
+    revalidatePath('/'); // todo make this work. calorie display isnt actually updating.
     return new NextResponse(JSON.stringify({}), {
         status: 200,
         headers: { 'Content-Type': 'application/json' }

@@ -2,6 +2,8 @@ import { createClient } from "@/utils/supabase/server";
 import styles from "./Foods.module.scss";
 import ServingItem from "./ServingItem";
 
+export const revalidate = 1;
+
 async function getTodayAndServings() {
     const supabase = await createClient();
     const userData = await supabase.auth.getUser();

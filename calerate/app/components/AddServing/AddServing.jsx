@@ -59,9 +59,9 @@ export default function AddServing({ food, titleCaseDescription }) {
             })
         })
         if (res.ok) {
-            router.refresh();
             setAdding(false);
             setSuccess(true);
+            router.refresh();
             setTimeout(() => {
                 setSuccess(false);
                 setOpen(false);

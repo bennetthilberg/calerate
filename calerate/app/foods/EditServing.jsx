@@ -2,11 +2,18 @@
 import { useState,useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross1Icon } from "@radix-ui/react-icons";
+import { CheckIcon } from "@radix-ui/react-icons";
+import { ClipLoader } from "react-spinners";
 import styles from "./EditServing.module.scss";
+import { useRouter } from "next/navigation";
 
 export default function EditServing({ serving }) {
     const [servingSizeValue, setServingSizeValue] = useState(serving.amount);
     const [totalCalories, setTotalCalories] = useState(serving.calories);
+    const [editing, setEditing] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [open, setOpen] = useState(false);
+    const router = useRouter();
     useEffect(() => {
         if (serving && servingSizeValue) {
             const calsPer100g = serving.calories_per_100g;
@@ -25,6 +32,7 @@ export default function EditServing({ serving }) {
     }
     async function handleEdit(e) {
         e.preventDefault();
+        setEditing(true);
         console.log(servingSizeValue);
         // todo validate
         const res = await fetch('/api/edit-serving', {
@@ -39,13 +47,24 @@ export default function EditServing({ serving }) {
             }
         });
         if(res.ok){
-            console.log('success');
+            setEditing(false);
+            setSuccess(true);
+            router.refresh();
+            setTimeout(() => {
+                setSuccess(false);
+                setOpen(false);
+            }, 600);
         } else {
             console.error('Error updating serving. Res:', res);
+            setEditing(false);
         }
     }
     return (
-        <Dialog.Root>
+        <Dialog.Root
+            open={open}
+            onOpenChange={() => setOpen(!open)}
+            onCloseAutoFocus={e => e.preventDefault()}
+        >
             <Dialog.Trigger asChild>
                 <button>
                     Edit
@@ -82,7 +101,15 @@ export default function EditServing({ serving }) {
                             className={styles.logButton}
                             type="submit"
                         >
-                            Save
+                            {
+                                editing && <ClipLoader className={styles.spinner} speedMultiplier={1.4} color="blue" size={21.25} />
+                            }
+                            {
+                                success && <CheckIcon color="green" className={styles.checkIcon} />
+                            }
+                            {
+                                !editing && !success && 'Save changes'
+                            }
                         </button>
                     </form>
                 </Dialog.Content>

@@ -11,7 +11,8 @@ export const metadata = {
 
 export default async function RootLayout({ children, searchParams }) {
   const supabase = await createClient();
-  const user = await supabase.auth.getUser();
+  const userData = await supabase.auth.getUser();
+  const user = userData?.data?.user;
   const query = searchParams?.query ?? "";
   return (
     <html lang="en">

@@ -1,4 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function PATCH(req) {
@@ -22,7 +23,7 @@ export async function PATCH(req) {
             .select('*');
         if (updatedServingError) throw updatedServingError;
         console.log('updatedServingData:', updatedServingData);
-
+        revalidatePath('/');
         return new NextResponse(JSON.stringify({}), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }

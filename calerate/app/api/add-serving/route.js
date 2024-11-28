@@ -7,6 +7,7 @@
 
 */
 import { createClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
@@ -80,7 +81,7 @@ export async function POST(req) {
             headers: { 'Content-Type': 'application/json' }
         });
     }
-
+    revalidatePath('/');
     return new NextResponse(JSON.stringify({}), {
         status: 200,
         headers: { 'Content-Type': 'application/json' }

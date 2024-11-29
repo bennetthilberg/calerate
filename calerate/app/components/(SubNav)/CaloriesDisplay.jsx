@@ -24,7 +24,7 @@ export default async function CaloriesDisplay() {
 
     return (
         <div>
-            {totalCalories} calories
+            {Math.round(totalCalories)} calories
         </div>
     )
 }

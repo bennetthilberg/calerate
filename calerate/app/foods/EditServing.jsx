@@ -33,7 +33,7 @@ export default function EditServing({ serving }) {
     async function handleEdit(e) {
         e.preventDefault();
         setEditing(true);
-        console.log(servingSizeValue);
+
         // todo validate
         const res = await fetch('/api/edit-serving', {
             method: 'PATCH',

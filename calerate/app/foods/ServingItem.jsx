@@ -1,3 +1,4 @@
+import DeleteServing from "./DeleteServing";
 import EditServing from "./EditServing";
 import styles from "./ServingItem.module.scss";
 
@@ -12,9 +13,7 @@ export default function ServingItem({ serving }) {
             </div>
             <div className={styles.actions}>
                 <EditServing serving={serving} />
-                <button>
-                    Delete
-                </button>
+                <DeleteServing serving={serving} />
             </div>
         </div>
     )

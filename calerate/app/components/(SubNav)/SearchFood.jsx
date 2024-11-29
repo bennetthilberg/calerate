@@ -21,7 +21,7 @@ export default function SearchFood({ initialQuery }) {
 
 
     function handleSearchChange(e) {
-        console.log('handleSearchChange run');
+
         const value = e.target.value;
         setSearchValue(value);
         router.prefetch(`/search-results?query=${value}`); // Prefetch the results page

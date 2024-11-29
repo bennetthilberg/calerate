@@ -31,7 +31,7 @@ export default async function SearchResults({ searchParams }) {
 
     // Fetch search results at the top level
     const searchResults = await fetchSearchResults(query);
-    console.log('searchResults', searchResults);
+
     if (!searchResults.foods || searchResults.foods.length === 0) {
         return <p>No results found.</p>;
     }

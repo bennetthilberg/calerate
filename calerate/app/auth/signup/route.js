@@ -6,8 +6,6 @@ export async function POST(req) {
     const {email, password} = await req.json();
 
     const { data: newUserData, error: newUserError } = await supabase.auth.signUp({email, password});
-    newUserData && console.log('newUserData', newUserData);
-    newUserError && console.log('newUserError', newUserError);
     if(newUserError){
         return NextResponse.json({ error: newUserError.message }, { status: 400 });
     }
@@ -22,7 +20,7 @@ export async function POST(req) {
             email: newUserData.user.email
         })
         .select()
-    dbData && console.log('dbData', dbData);
+
     if(dbError){
         return NextResponse.json({ error: dbError.message }, { status: 400 });
     }

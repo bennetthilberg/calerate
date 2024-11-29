@@ -3,7 +3,6 @@ import FoodSearchResult from "../components/FoodSearchResult/FoodSearchResult";
 import styles from "./SearchResults.module.scss";
 
 async function fetchSearchResults(query) {
-    console.log('searching for', query);
     const apiKey = process.env.DATA_GOV_API_KEY;
     const apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${apiKey}`;
 
@@ -16,7 +15,7 @@ async function fetchSearchResults(query) {
             sortBy: 'dataType.keyword',
             sortOrder: 'asc',
         }),
-        next: { revalidate: 60 }, // Cache the data for 60 seconds
+        next: { revalidate: 60 }, 
     });
 
     if (!response.ok) {

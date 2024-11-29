@@ -1,26 +1,16 @@
-/*
 
-1. check if the user already has a record for today in the days table
-  if not, create a new record
-2. add the serving to the servings table and associate it with the day_id
-3. update the total calories for the day in the days table
-
-*/
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
     const { food, servingSizeValue, calories, name } = await req.json();
-    //console.log('req', req);
-    //console.log('food', food);
-    //console.log('servingSizeValue', servingSizeValue);
-    console.log('name:', name);
+
     const supabase = await createClient();
     const { data: userData } = await supabase.auth.getUser();
     const user = userData.user;
     const currentDate = new Date().toISOString().split('T')[0];
-    //console.log("user:", user);
+
     let today;
     try {
         const { data: daysData, error: daysError } = await supabase

@@ -35,11 +35,7 @@ export default function FoodSearchResult({ food }) {
         'at', 'by', 'from', 'in', 'into', 'of', 'off', 'on', 'onto',
     ]
     function getTitleCase() {
-        if (!food?.description ||
-            typeof food.description !== 'string' ||
-            food.description.length < 1 ||
-            food.description == ' '
-        ) {
+        if (typeof food?.description !== 'string' || food.description.trim() === '') {
             return null;
         }
         const words = food.description.split(" ");

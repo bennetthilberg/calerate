@@ -27,7 +27,7 @@ async function fetchSearchResults(query) {
 
 
 export default async function SearchResults({ searchParams }) {
-    const query = searchParams.query || '';
+    const {query} = await searchParams || '';
 
     // Fetch search results at the top level
     const searchResults = await fetchSearchResults(query);

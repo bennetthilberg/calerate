@@ -2,12 +2,15 @@ import AddServing from "../AddServing/AddServing";
 import styles from "./FoodSearchResult.module.scss";
 
 export default function FoodSearchResult({ food }) {
+    function hasValidNutritionData(energy, servingSize, servingSizeUnit, energyValue) {
+        return energy && servingSize && servingSizeUnit && energyValue;
+    }
     function calculateCaloriesPer100g() {
         const energy = food?.foodNutrients.find(nutrient => nutrient.nutrientName === "Energy" && nutrient.unitName === "KCAL");
         const servingSize = food?.servingSize;
         const servingSizeUnit = food?.servingSizeUnit; // almost always "g"
         const energyValue = energy?.value; // an amount of calories in some amount of the food
-        if (!energy || !servingSize || !servingSizeUnit || !energyValue) {
+        if (!hasValidNutritionData(energy, servingSize, servingSizeUnit, energyValue)) {
             return null;
         }
         if (servingSizeUnit !== "g") {

@@ -2,24 +2,27 @@ import AddServing from "../AddServing/AddServing";
 import styles from "./FoodSearchResult.module.scss";
 
 export default function FoodSearchResult({ food }) {
-    function hasValidNutritionData(energy, servingSize, servingSizeUnit, energyValue) {
-        return energy && servingSize && servingSizeUnit && energyValue;
-    }
-    function calculateCaloriesPer100g() {
+    /*
+    for SR Legacy, there's no servingSize/servingSizeUnit, but
+    the foodNutrients array has an object with nutrientName "Energy"
+    and the value is calories per 100g
+    -same with Survey (FNDDS) 
+    -same with Foundation
+    -branded does too. they also have servingSize and stuff but for
+      the sake of simplicity we can calculate same way as the others
+    ensure nutrient.unitName is "KCAL" since some foods have kj too
+    */
+    function getCaloriesPer100g() {
         const energy = food?.foodNutrients.find(nutrient => nutrient.nutrientName === "Energy" && nutrient.unitName === "KCAL");
-        const servingSize = food?.servingSize;
-        const servingSizeUnit = food?.servingSizeUnit; // almost always "g"
         const energyValue = energy?.value; // an amount of calories in some amount of the food
-        if (!hasValidNutritionData(energy, servingSize, servingSizeUnit, energyValue)) {
+        if (!energyValue) {
+            console.log('no energy value')
             return null;
         }
-        if (servingSizeUnit !== "g") {
-            return null; // just wont display these. they are rare
-        }
-        const calsPer100g = (energyValue / servingSize) * 100;
-        return calsPer100g;
+        // todo check if there is a serving size and it's not 100g, adjust or just dont display it
+        return energyValue;
     }
-    const calsPer100g = calculateCaloriesPer100g();
+    const calsPer100g = getCaloriesPer100g();
     if (calsPer100g === null ||
         isNaN(calsPer100g) ||
         calsPer100g < 14 ||
@@ -37,9 +40,13 @@ export default function FoodSearchResult({ food }) {
         'for', 'and', 'nor', 'but', 'or', 'yet', 'so', 'with',
         'at', 'by', 'from', 'in', 'into', 'of', 'off', 'on', 'onto',
     ]
-    function getTitleCase() {
+    function getFoodTitle() {
         if (typeof food?.description !== 'string' || food.description.trim() === '') {
             return null;
+        }
+        if(food.description !== food.description.toUpperCase()) {
+            return food.description;
+            // if it's already in a correct case, don't change it
         }
         const words = food.description.split(" ");
         const titleCased = words.map(word => {
@@ -54,19 +61,22 @@ export default function FoodSearchResult({ food }) {
         });
         return titleCased.join(' ');
     }
-    const titleCase = getTitleCase();
+    const foodTitle = getFoodTitle();
 
     return (
         <div className={styles.foodSearchResult}>
-            <h2>{titleCase}</h2>
+            <h2>{foodTitle}</h2>
             <p>
                 <span className="bold">{Math.round(calsPer100g)}</span> calories per 100g
+            </p>
+            <p>
+                from: {food.dataType}
             </p>
             <AddServing food={
                 {
                     ...food,
                     calsPer100g,
-                    titleCaseDescription: titleCase
+                    foodTitle: foodTitle
                 }
             } />
         </div>

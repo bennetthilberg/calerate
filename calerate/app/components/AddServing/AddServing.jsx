@@ -7,7 +7,7 @@ import { ClipLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 //import { addServingAction } from "./actions";
 
-export default function AddServing({ food, titleCaseDescription }) {
+export default function AddServing({ food, foodTitle }) {
     const [servingSizeValue, setServingSizeValue] = useState('');
     const [totalCalories, setTotalCalories] = useState(0);
     const [adding, setAdding] = useState(false);
@@ -52,7 +52,7 @@ export default function AddServing({ food, titleCaseDescription }) {
                 food,
                 servingSizeValue,
                 calories: totalCalories,
-                name: food.titleCaseDescription,
+                name: foodTitle,
                 calsPer100g: food.calsPer100g
                 // we'll assume it's always grams, but could pass other units
                 // here in the future
@@ -92,7 +92,7 @@ export default function AddServing({ food, titleCaseDescription }) {
                             </button>
                         </Dialog.Close>
                         <Dialog.Title className={styles.title}>
-                            {food.titleCaseDescription}
+                            {foodTitle}
                         </Dialog.Title>
                         <p>
                             {Math.round(totalCalories)} calories

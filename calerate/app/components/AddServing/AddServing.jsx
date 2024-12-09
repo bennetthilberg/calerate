@@ -7,7 +7,7 @@ import { ClipLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 //import { addServingAction } from "./actions";
 
-export default function AddServing({ food, foodTitle }) {
+export default function AddServing({ food }) {
     const [servingSizeValue, setServingSizeValue] = useState('');
     const [totalCalories, setTotalCalories] = useState(0);
     const [adding, setAdding] = useState(false);
@@ -26,7 +26,7 @@ export default function AddServing({ food, foodTitle }) {
         }
     }, [servingSizeValue]);
     useEffect(() => {
-        if (servingSizeValue && !isNaN(servingSizeValue) && servingSizeValue > 0) {
+        if (!isNaN(servingSizeValue) && servingSizeValue > 0) {
             setLogOk(true);
         }
         else {
@@ -41,6 +41,8 @@ export default function AddServing({ food, foodTitle }) {
     }
     async function handleLog(e) {
         e.preventDefault();
+        console.log('foodTitle:', food.foodTitle);
+        console.log('calsPer100g:', food.calsPer100g);
         if(!logOk) return;
         setAdding(true);
         const res = await fetch('/api/add-serving', {
@@ -52,7 +54,7 @@ export default function AddServing({ food, foodTitle }) {
                 food,
                 servingSizeValue,
                 calories: totalCalories,
-                name: foodTitle,
+                name: food.foodTitle,
                 calsPer100g: food.calsPer100g
                 // we'll assume it's always grams, but could pass other units
                 // here in the future
@@ -92,7 +94,7 @@ export default function AddServing({ food, foodTitle }) {
                             </button>
                         </Dialog.Close>
                         <Dialog.Title className={styles.title}>
-                            {foodTitle}
+                            {food.foodTitle}
                         </Dialog.Title>
                         <p>
                             {Math.round(totalCalories)} calories

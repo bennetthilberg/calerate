@@ -76,7 +76,7 @@ export default function FoodSearchResult({ food }) {
                 {
                     ...food,
                     calsPer100g,
-                    foodTitle: foodTitle
+                    foodTitle
                 }
             } />
         </div>

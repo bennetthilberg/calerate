@@ -41,8 +41,6 @@ export default function AddServing({ food }) {
     }
     async function handleLog(e) {
         e.preventDefault();
-        console.log('foodTitle:', food.foodTitle);
-        console.log('calsPer100g:', food.calsPer100g);
         if(!logOk) return;
         setAdding(true);
         const res = await fetch('/api/add-serving', {
@@ -82,10 +80,11 @@ export default function AddServing({ food }) {
                 </button>
             </Dialog.Trigger>
             <Dialog.Portal>
-                <Dialog.Overlay className={styles.overlay} />
+                <Dialog.Overlay className={`${styles.overlay} overlay`} />
                 <Dialog.Content
                     asChild
                     aria-describedby={undefined}
+                    className="modalContent"
                 >
                     <form className={styles.content} onSubmit={e => handleLog(e)}>
                         <Dialog.Close asChild>

@@ -51,10 +51,11 @@ export default function DeleteServing({ serving }) {
                 </button>
             </Dialog.Trigger>
             <Dialog.Portal>
-                <Dialog.Overlay className={styles.overlay} />
+                <Dialog.Overlay className={'overlay'} />
                 <Dialog.Content
                     asChild
                     aria-describedby={undefined}
+                    className="dialogContent"
                 >
                     <form
                         className={styles.content}

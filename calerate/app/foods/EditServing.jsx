@@ -71,10 +71,11 @@ export default function EditServing({ serving }) {
                 </button>
             </Dialog.Trigger>
             <Dialog.Portal>
-                <Dialog.Overlay className={styles.overlay} />
+                <Dialog.Overlay className={'overlay'} />
                 <Dialog.Content
                     asChild
                     aria-describedby={undefined}
+                    className="dialogContent"
                 >
                     <form className={styles.content} onSubmit={e => handleEdit(e)}>
                         <Dialog.Close asChild>

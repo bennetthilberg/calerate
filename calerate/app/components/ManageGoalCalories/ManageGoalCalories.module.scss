@@ -1,0 +1,24 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    width: 300px;
+    label{
+        margin-bottom: 6px;
+        display: block;
+    }
+    .goalInputHolder{
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        margin-bottom: 32px;
+        input{
+            height: 32px;
+            width: 70px;
+            font-size: 20px;
+        }
+        span{
+            font-size: 18px;
+        }
+    }
+}

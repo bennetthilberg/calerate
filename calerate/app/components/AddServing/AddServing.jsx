@@ -59,9 +59,9 @@ export default function AddServing({ food }) {
             })
         })
         if (res.ok) {
+            router.refresh();
             setAdding(false);
             setSuccess(true);
-            router.refresh();
             setTimeout(() => {
                 setSuccess(false);
                 setOpen(false);
@@ -84,7 +84,7 @@ export default function AddServing({ food }) {
                 <Dialog.Content
                     asChild
                     aria-describedby={undefined}
-                    className="modalContent"
+                    className="dialogContent"
                 >
                     <form className={styles.content} onSubmit={e => handleLog(e)}>
                         <Dialog.Close asChild>

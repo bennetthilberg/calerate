@@ -5,7 +5,6 @@ import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import ManageGoalCalories from "../ManageGoalCalories/ManageGoalCalories";
 
 export default async function CaloriesDisplay() {
-
     let totalCalories = 0;
     let goalCalories;
     const supabase = await createClient();
@@ -21,8 +20,8 @@ export default async function CaloriesDisplay() {
         console.error('Error fetching total calories:', error.message);
     }
     if (data[0]) {
-        totalCalories = data[0].total_calories;
-        goalCalories = data[0].goal_calories;
+        totalCalories = data[0]?.total_calories;
+        goalCalories = data[0]?.goal_calories;
         todayId = data[0].id;
     }
 
@@ -32,23 +31,11 @@ export default async function CaloriesDisplay() {
                 `/ ${goalCalories} calories` :
                 "calories"
             }
-            <Dialog.Root>
-                <Dialog.Trigger asChild>
-                    <button>
-                        Manage Goal
-                    </button>
-                </Dialog.Trigger>
-                <Dialog.Portal>
-                    <Dialog.Overlay className="overlay" />
-                    <Dialog.Content className="modalContent">
-                        <VisuallyHidden.Root>
-                            <Dialog.Title>Manage goal calories</Dialog.Title>
-                            <Dialog.Description>Add or edit today's calore goal</Dialog.Description>
-                        </VisuallyHidden.Root>
-                        <ManageGoalCalories />
-                    </Dialog.Content>
-                </Dialog.Portal>
-            </Dialog.Root>
+            <ManageGoalCalories 
+                todayId={todayId}
+                goalCalories={goalCalories}
+                totalCalories={totalCalories}
+            />
         </div>
     )
 }

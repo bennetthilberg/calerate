@@ -1,20 +1,21 @@
 'use client';
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation"; // New import for navigation
 import styles from "./SearchFood.module.scss";
 import { PlusIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { ClipLoader } from "react-spinners";
 
 export default function SearchFood({ initialQuery }) {
     const [searchValue, setSearchValue] = useState("");
     const [isTyping, setIsTyping] = useState(initialQuery);
     const router = useRouter();
-    const debounceTimeout = useRef(null); // To manage debouncing
-    const [searching, setSearching] = useState(false);
+    const debounceTimeout = useRef(null);
+    const [isPending, startTransition] = useTransition();
 
     useEffect(() => {
-        // Prefetch the search results page on component mount
         router.prefetch('/search-results');
     }, [router]);
+
     useEffect(() => {
         return () => {
             if (debounceTimeout.current) {
@@ -22,7 +23,7 @@ export default function SearchFood({ initialQuery }) {
             }
         };
     }, []);
-    
+
     function handleSearchChange(e) {
         const value = e.target.value;
         setSearchValue(value);
@@ -34,19 +35,21 @@ export default function SearchFood({ initialQuery }) {
 
         // Set new timeout
         debounceTimeout.current = setTimeout(() => {
-            if (value.trim()) {
-                router.prefetch(`/search-results?query=${value}`);
-                router.push(`/search-results?query=${value}`);
-            }
-        }, 300); // 300ms delay
+            startTransition(() => {
+                if (value.trim()) {
+                    router.prefetch(`/search-results?query=${value}`);
+                    router.push(`/search-results?query=${value}`);
+                }
+            })
+        }, 100); // 300ms delay
     }
 
     function handleSubmit(e) {
         e.preventDefault();
         //setSearching(true);
-        if (searchValue.trim()) {
-            router.push(`/search-results?query=${searchValue}`); // Navigate to search results
-        }
+        startTransition(() => {
+            searchValue.trim() && router.push(`/search-results?query=${searchValue}`);
+        });
     }
 
     return (
@@ -58,7 +61,12 @@ export default function SearchFood({ initialQuery }) {
                 onChange={e => handleSearchChange(e)}
             />
             <button type="submit">
-                <MagnifyingGlassIcon />
+                {
+                    isPending ?
+                        <ClipLoader color="#fff" size={20} speedMultiplier={1.75} /> :
+                        <MagnifyingGlassIcon />
+                }
+
             </button>
         </form>
     );

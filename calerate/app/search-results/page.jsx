@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import FoodSearchResult from "../components/FoodSearchResult/FoodSearchResult";
 import styles from "./SearchResults.module.scss";
-import fetchFoodsByType from "@/utils/searchFoodsByType";
+import searchFoodsByType from "@/utils/searchFoodsByType";
 
 // todo: pagination or "load more" button
 // todo: shimmer
@@ -15,10 +15,10 @@ export default async function SearchResults({ searchParams }) {
     }
 
     const [foundationFoods, legacyFoods, surveyFoods, brandedFoods] = await Promise.all([
-        fetchFoodsByType(query, "Foundation"),
-        fetchFoodsByType(query, "SR Legacy"),
-        fetchFoodsByType(query, "Survey (FNDDS)"),
-        fetchFoodsByType(query, "Branded"),
+        searchFoodsByType(query, "Foundation"),
+        searchFoodsByType(query, "SR Legacy"),
+        searchFoodsByType(query, "Survey (FNDDS)"),
+        searchFoodsByType(query, "Branded"),
     ]);
 
     const foods = [

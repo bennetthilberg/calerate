@@ -16,27 +16,29 @@ export default function SearchFood({ initialQuery }) {
         router.prefetch('/search-results');
     }, [router]);
     useEffect(() => {
-        setSearching(false);
-    }, [])
-
-
+        return () => {
+            if (debounceTimeout.current) {
+                clearTimeout(debounceTimeout.current);
+            }
+        };
+    }, []);
+    
     function handleSearchChange(e) {
-
         const value = e.target.value;
         setSearchValue(value);
-        router.prefetch(`/search-results?query=${value}`); // Prefetch the results page
-        router.push(`/search-results?query=${value}`); // Navigate to search results
-        // Prefetch search results with debouncing
-        /*
-        setIsTyping(true);
-        clearTimeout(debounceTimeout.current);
+
+        // Clear any existing timeout
+        if (debounceTimeout.current) {
+            clearTimeout(debounceTimeout.current);
+        }
+
+        // Set new timeout
         debounceTimeout.current = setTimeout(() => {
             if (value.trim()) {
-                router.prefetch(`/search-results?query=${value}`); // Prefetch the results page
+                router.prefetch(`/search-results?query=${value}`);
+                router.push(`/search-results?query=${value}`);
             }
-            setIsTyping(false);
-        }, 10); // Debounce delay
-        */
+        }, 300); // 300ms delay
     }
 
     function handleSubmit(e) {

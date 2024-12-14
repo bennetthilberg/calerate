@@ -1,0 +1,14 @@
+.entryForm{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    h2{
+        font-size: 22px;
+        margin: 0;
+    }
+    button{
+        width: 100px;
+        height: 40px;
+    }
+}

@@ -5,21 +5,23 @@ export default async function searchFoodsByType(query, dataType) {
   const apiKey = process.env.DATA_GOV_API_KEY;
   const apiUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${apiKey}`;
   const condensedQuery = removeFunctionWords(query);
-  const strictCondensedQuery = condensedQuery.split(' ').map(word => `+${word}`).join(' ');
+  //const strictCondensedQuery = condensedQuery.split(' ').map(word => `+${word}`).join(' ');
+  const strictCondensedQuery = condensedQuery.split(' ').map(word => `*${word}*`).join(' ');
 
   try {
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        query: strictCondensedQuery,
+        //query: strictCondensedQuery,
+        query: condensedQuery,
         //query: query,
         pageSize: desiredResults,
         pageNumber: 1,
         sortBy: 'dataType.keyword',
         sortOrder: 'asc',
         dataType: [dataType],
-        //requireAllWords: true
+        requireAllWords: true
       }),
       next: { revalidate: 60 },
     });

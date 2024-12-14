@@ -59,6 +59,7 @@ export default function SearchFood({ initialQuery }) {
                 placeholder="Search to add foods"
                 value={searchValue}
                 onChange={e => handleSearchChange(e)}
+                onFocus={e => e.target.select()}
             />
             <button type="submit">
                 {

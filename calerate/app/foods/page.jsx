@@ -1,6 +1,8 @@
 import { createClient } from "@/utils/supabase/server";
 import styles from "./Foods.module.scss";
+import AddMiscCalories from "../components/AddMiscCalories/AddMiscCalories";
 import ServingItem from "./ServingItem";
+
 
 export const revalidate = 1;
 
@@ -36,6 +38,7 @@ export default async function Foods() {
             <h3>
                 Total calories: {today?.total_calories ?? 0}
             </h3>
+            <AddMiscCalories />
             <ul>
                 {servings && servings.map(serving => (
                     <ServingItem key={serving.id} serving={serving} />

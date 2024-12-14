@@ -3,6 +3,8 @@ import { createClient } from "@/utils/supabase/server";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import ManageGoalCalories from "../ManageGoalCalories/ManageGoalCalories";
+import ManageGoalCaloriesTextButton from "../ManageGoalCalories/ManageGoalCaloriesTextButton";
+import styles from "./SubNav.module.scss"
 
 export default async function CaloriesDisplay() {
     let totalCalories = 0;
@@ -26,12 +28,12 @@ export default async function CaloriesDisplay() {
     }
 
     return (
-        <div>
-            {Math.round(totalCalories)} {goalCalories ?
+        <div className={styles.goalCaloriesHolder}>
+            {/*Math.round(totalCalories)} {goalCalories ?
                 `/ ${goalCalories} calories` :
                 "calories"
-            }
-            <ManageGoalCalories 
+            */}
+            <ManageGoalCaloriesTextButton 
                 todayId={todayId}
                 goalCalories={goalCalories}
                 totalCalories={totalCalories}

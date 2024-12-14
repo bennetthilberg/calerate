@@ -1,8 +1,42 @@
+$green: rgb(27, 100, 60);
+$blackLicorice: rgb(22, 16, 18);
+$almostBlack: rgb(10, 10, 10);
+$vanDyke: rgb(56, 48, 46);
 .subNav{
-    width: 100vw;
-    background-color: rgb(226, 226, 226);
+    width: 100%;
+    max-width: 100%;
+    background-color: $almostBlack;
+    overflow: hidden;
     height: 68px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
+    border-bottom: 1px solid rgb(101, 101, 101);
+    padding-left: 6px;
+    padding-right: 6px;
+
+    .goalCaloriesHolder{
+        flex-shrink: 0;
+        width: auto;
+    }
+    .todayLink{
+        border-radius: 5px;
+        height: 49px;
+        background-color: $vanDyke;
+        border: 1.25px solid lighten($vanDyke, 12%);
+        flex-basis: 75px;
+        font-size: 15.5px;
+        flex-shrink: 0;
+        text-decoration: none;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        span{
+            width: auto;
+            height: auto;
+            text-align: center;
+        }
+    }
 }

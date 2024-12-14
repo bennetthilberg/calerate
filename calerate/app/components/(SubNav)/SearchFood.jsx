@@ -41,7 +41,7 @@ export default function SearchFood({ initialQuery }) {
                     router.push(`/search-results?query=${value}`);
                 }
             })
-        }, 100); // 300ms delay
+        }, 100); 
     }
 
     function handleSubmit(e) {
@@ -64,7 +64,7 @@ export default function SearchFood({ initialQuery }) {
             <button type="submit">
                 {
                     isPending ?
-                        <ClipLoader color="#fff" size={20} speedMultiplier={1.75} /> :
+                        <ClipLoader className={styles.clipLoader} color="#fff" size={18} speedMultiplier={1.75} /> :
                         <MagnifyingGlassIcon />
                 }
 

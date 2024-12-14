@@ -66,10 +66,14 @@ export default function FoodSearchResult({ food }) {
     return (
         <div className={styles.foodSearchResult}>
             <h2>{foodTitle}</h2>
+            {
+                /* 
             <p>
                 <span className="bold">{Math.round(calsPer100g)}</span> calories per 100g
             </p>
-            <p>
+                */
+            }
+            <p className={styles.source}>
                 from: {food.dataType}
             </p>
             <AddServing food={

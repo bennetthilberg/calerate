@@ -21,11 +21,11 @@ export default async function NavBar() {
             <h1>Calerate</h1>
             {/*<SignInOut />*/}
             {user ?
-                <form action={handleSignOut}>
+                <form className={styles.logInOut} action={handleSignOut}>
                     <button type="submit">Sign Out</button>
                 </form>
                 :
-                <Link href='login'>Log in</Link>
+                <Link className={styles.logInOut} href='login'>Log in</Link>
             }
         </div>
     )

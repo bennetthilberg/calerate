@@ -1,20 +1,35 @@
+$green: rgb(27, 100, 60);
+$blackLicorice: rgb(22, 16, 18);
+$almostBlack: rgb(10, 10, 10);
+$vanDyke: rgb(56, 48, 46);
+
 .navBar{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    h1, p{
-        margin: 0;
+    position: relative;
+    height: 46px;
+    form.logInOut{
+        height: 25px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0.6rem;
+        display: grid;
+        place-items: center;
+        button{
+            height: 100%;
+        }
     }
     h1{
-        font-size: 24px;
+        margin: 0;
+        font-weight: normal;
+        font-size: 22.5px;
     }
-    p{
-        font-size: 16px;
-    }
+    background-color: $almostBlack;
     padding: 1rem 2rem;
-    background-color: #333;
     color: #fff;
     font-size: 1.2rem;
-    font-weight: 600;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-weight: 300;
+    border-bottom: 1px solid rgb(101, 101, 101);
 }

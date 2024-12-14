@@ -1,3 +1,7 @@
+$green: rgb(27, 100, 60);
+$blackLicorice: rgb(22, 16, 18);
+$almostBlack: rgb(10, 10, 10);
+$vanDyke: rgb(56, 48, 46);
 * {
     box-sizing: border-box !important;
 
@@ -18,7 +22,9 @@ body {
 button {
     cursor: pointer;
 }
-
+p, span, h1, h2, h3, h4, h5, h6 {
+    color: white;
+}
 .overlay {
     background-color: rgba(0, 0, 0, 0.35);
     position: fixed;

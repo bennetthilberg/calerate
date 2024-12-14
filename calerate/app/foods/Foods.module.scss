@@ -1,0 +1,82 @@
+$green: rgb(27, 100, 60);
+$blackLicorice: rgb(22, 16, 18);
+$almostBlack: rgb(10, 10, 10);
+$vanDyke: rgb(56, 48, 46);
+.foods{
+    background-color: $almostBlack;
+    padding: 8px;
+    padding-top: 12px;
+    h1{
+        margin: 0;
+        //margin-bottom: 4px;
+        font-weight: 500;
+        font-size: 25px;
+    }
+    p.dateText{
+        margin: 0;
+        font-size: 17px;
+        color: darken(white, 30%);
+    }
+    a.prevDays{
+        margin-top: 10px;
+        color: lighten($green, 22%);
+        span{
+            color: inherit;
+        }
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 500;
+        margin-right: 8px;
+        svg{
+            height: 24px;
+            width: 24px;
+            margin-left: -3.5px;
+            margin-bottom: -0.8px;
+        }
+    }
+    h2.remaining{
+        font-size: 21px;
+        font-weight: 400;
+        span{
+            font-weight: bold;
+        }
+        width: 100%;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+    .figuresText{
+        color: darken(white, 25%);
+        font-size: 17px;
+        font-weight: normal;
+        width: 100%;
+        margin-top: 8px;
+        text-align: center;
+        span{
+            font-weight: bold;
+            color: inherit;
+        }
+    }
+    .caloriesLeftDisplay{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    .meterContainer{
+        width: 100%;
+        height: 26px;
+        border-radius: 13px;
+        background-color: lighten($almostBlack, 6%);
+        border: 2px solid lighten($almostBlack, 24%);
+    }
+    .meterFill{
+        height: 100%;
+        transition: width 0.3s ease, background-color 0.3s ease;
+        border-radius: 13px;
+    }
+}

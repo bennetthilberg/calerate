@@ -2,7 +2,8 @@ import { createClient } from "@/utils/supabase/server";
 import styles from "./Foods.module.scss";
 import AddMiscCalories from "../components/AddMiscCalories/AddMiscCalories";
 import ServingItem from "./ServingItem";
-
+import Link from "next/link";
+import { ChevronRightIcon } from "@radix-ui/react-icons";
 
 export const revalidate = 1;
 
@@ -34,10 +35,48 @@ export default async function Foods() {
 
     return (
         <div className={styles.foods}>
-            <h1>Foods</h1>
-            <h3>
-                Total calories: {today?.total_calories ?? 0}
-            </h3>
+            <h1>Today's Foods</h1>
+            <p className={styles.dateText}>
+                {new Intl.DateTimeFormat('en-US', {
+                    weekday: 'long',
+                    month: 'long',
+                    day: 'numeric'
+                }).format(new Date())}
+            </p>
+            <Link href={'/food-history'} className={styles.prevDays}>
+                <span>
+                    View previous days
+                </span>
+                <ChevronRightIcon />
+            </Link>
+            {today?.goal_calories ?
+                <div className={styles.caloriesLeftDisplay}>
+                    <h2 className={styles.remaining}>
+                        <span>{today.goal_calories - today.total_calories}</span> calories remaining
+                    </h2>
+                    <div className={styles.meterContainer}>
+                        <div
+                            className={styles.meterFill}
+                            style={{
+                                width: `${Math.min((today.total_calories / today.goal_calories) * 100, 100)}%`,
+                                backgroundColor: `hsl(${Math.max(120 * (1 - today.total_calories / today.goal_calories), 0)}, 70%, 45%)`
+                            }}
+                        />
+                    </div>
+                    <p className={styles.figuresText}>
+                        <span>
+                            {`${today.total_calories} `} 
+                        </span>
+                        consumed of
+                        <span>
+                            {` ${today.goal_calories} `}
+                        </span>
+                        goal
+                    </p>
+                </div>
+                : <h2>{today.total_calories} consumed</h2>
+            }
+
             <AddMiscCalories />
             <ul>
                 {servings && servings.map(serving => (

@@ -47,7 +47,7 @@ $vanDyke: rgb(56, 48, 46);
         margin-bottom: 8px;
     }
     .figuresText{
-        color: darken(white, 25%);
+        color: darken(white, 20%);
         font-size: 17px;
         font-weight: normal;
         width: 100%;
@@ -59,6 +59,7 @@ $vanDyke: rgb(56, 48, 46);
         }
     }
     .caloriesLeftDisplay{
+        margin-top: 20px;
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -66,6 +67,10 @@ $vanDyke: rgb(56, 48, 46);
         justify-content: center;
         padding-left: 16px;
         padding-right: 16px;
+        background-color: lighten($almostBlack, 5%);
+        border: 1.5px solid lighten($almostBlack, 10%);
+        border-radius: 8px;
+        margin-bottom: 15px;
     }
     .meterContainer{
         width: 100%;
@@ -78,5 +83,16 @@ $vanDyke: rgb(56, 48, 46);
         height: 100%;
         transition: width 0.3s ease, background-color 0.3s ease;
         border-radius: 13px;
+    }
+    .buttonsHolder{
+        padding-left: 12px;
+        padding-right: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+    }
+    .servings{
+        padding: 0px;
     }
 }

@@ -8,8 +8,8 @@ export default function ServingItem({ serving }) {
     return (
         <div className={styles.servingItem}>
             <div className={styles.info}>
-                <h3>{serving.name}</h3>
-                <p>{serving.amount} {serving.amount_unit} - <span className="bold">{Math.round(serving.calories)} calories</span></p>
+                <h3 className={styles.servingName}>{serving.name}</h3>
+                <p className={styles.amount}>{serving.amount} {serving.amount_unit} - <span className={styles.caloriesText}>{Math.round(serving.calories)} calories</span></p>
             </div>
             <div className={styles.actions}>
                 <EditServing serving={serving} />

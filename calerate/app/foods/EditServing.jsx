@@ -1,7 +1,7 @@
 'use client';
 import { useState,useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Cross1Icon } from "@radix-ui/react-icons";
+import { Cross1Icon, Pencil1Icon } from "@radix-ui/react-icons";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { ClipLoader } from "react-spinners";
 import styles from "./EditServing.module.scss";
@@ -66,8 +66,9 @@ export default function EditServing({ serving }) {
             onCloseAutoFocus={e => e.preventDefault()}
         >
             <Dialog.Trigger asChild>
-                <button>
+                <button className={styles.triggerButton}>
                     Edit
+                    <Pencil1Icon />
                 </button>
             </Dialog.Trigger>
             <Dialog.Portal>

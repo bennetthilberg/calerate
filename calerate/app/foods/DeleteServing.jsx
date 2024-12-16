@@ -1,7 +1,7 @@
 'use client';
 import * as Dialog from "@radix-ui/react-dialog";
 import { useEffect, useState } from "react";
-import { Cross1Icon, CheckIcon } from "@radix-ui/react-icons";
+import { Cross1Icon, CheckIcon, TrashIcon } from "@radix-ui/react-icons";
 import { ClipLoader } from "react-spinners";
 import styles from "./DeleteServing.module.scss";
 import { useRouter } from "next/navigation";
@@ -46,8 +46,8 @@ export default function DeleteServing({ serving }) {
             onOpenChange={() => setOpen(!open)}
         >
             <Dialog.Trigger asChild>
-                <button>
-                    Delete
+                <button className={styles.triggerButton}>
+                    <span>Delete</span> <TrashIcon width={'16px'} height={'16px'}/>
                 </button>
             </Dialog.Trigger>
             <Dialog.Portal>

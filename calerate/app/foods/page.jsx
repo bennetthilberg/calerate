@@ -1,9 +1,11 @@
 import { createClient } from "@/utils/supabase/server";
 import styles from "./Foods.module.scss";
+import createToday from "@/utils/createToday";
 import AddMiscCalories from "../components/AddMiscCalories/AddMiscCalories";
 import ServingItem from "./ServingItem";
 import Link from "next/link";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
+import EditGoalCalories from "../components/ManageGoalCalories/EditGoalCalories";
 
 export const revalidate = 1;
 
@@ -18,8 +20,14 @@ async function getTodayAndServings() {
         .select('*')
         .eq('user_id', user.id)
         .eq('date', new Date().toISOString().split('T')[0]);
-    if (daysData.length === 0 || !daysData) return [null, null];
-    const today = daysData[0];
+    let today;
+    if (daysData.length === 0 || !daysData) {
+        console.log('no day data found, creating today...');
+        today = await createToday();
+    } else {
+        console.log('day data found:', daysData[0]);
+        today = daysData[0];
+    }
     // get today's servings
     const { data: servingsData } = await supabase
         .from('servings')
@@ -65,7 +73,7 @@ export default async function Foods() {
                     </div>
                     <p className={styles.figuresText}>
                         <span>
-                            {`${today.total_calories} `} 
+                            {`${today.total_calories} `}
                         </span>
                         consumed of
                         <span>
@@ -74,11 +82,14 @@ export default async function Foods() {
                         goal
                     </p>
                 </div>
-                : <h2>{today.total_calories} consumed</h2>
+                : <h2>{today?.total_calories ?? 0} calories consumed</h2>
             }
-
-            <AddMiscCalories />
-            <ul>
+            <div className={styles.buttonsHolder}>
+                <AddMiscCalories />
+                <EditGoalCalories goalCalories={today?.goal_calories ?? null}
+                    totalCalories={today?.total_calories ?? null} />
+            </div>
+            <ul className={styles.servings}>
                 {servings && servings.map(serving => (
                     <ServingItem key={serving.id} serving={serving} />
                 ))}

@@ -68,31 +68,33 @@ export default function EditGoalCalories({ goalCalories, totalCalories }) {
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className="overlay" />
-                <Dialog.Content className={`dialogContent ${styles.content}`}>
-                    <VisuallyHidden.Root>
-                        <Dialog.Title>Manage goal calories</Dialog.Title>
-                        <Dialog.Description>Add or edit today's calore goal</Dialog.Description>
-                    </VisuallyHidden.Root>
-                    <h2>
-                        {goalCalories ? "Edit" : "Select"} your daily calorie goal
-                    </h2>
-                    <form onSubmit={e => handleSubmit(e)}>
+                <Dialog.Content asChild>
 
-                        <label>Calorie goal:</label>
+
+                    <form className={`dialogContent ${styles.content}`} onSubmit={e => handleSubmit(e)}>
+                        <Dialog.Close asChild>
+                            <button className="dialogCloseButton">
+                                <Cross1Icon />
+                            </button>
+                        </Dialog.Close>
+                        <VisuallyHidden.Root>
+                            <Dialog.Description>Add or edit today's calore goal</Dialog.Description>
+                        </VisuallyHidden.Root>
+                        <Dialog.Title>{goalCalories ? "Edit" : "Select"} your calorie goal</Dialog.Title>
+                        <label>Today's goal:</label>
                         <div className={styles.goalInputHolder}>
                             <input type="tel" maxLength={4} autoFocus value={goal} onChange={e => handleGoalChange(e)} />
                             <span>calories</span>
                         </div>
-                        <button type="submit">
-
+                        <button className={`primary ${styles.submit}`} type="submit">
                             {
-                                setting && <ClipLoader className={styles.spinner} speedMultiplier={1.4} color="blue" size={21.25} />
+                                setting && <ClipLoader className={styles.spinner} speedMultiplier={1.4} color="white" size={24} />
                             }
                             {
-                                success && <CheckIcon color="green" className={styles.checkIcon} />
+                                success && <CheckIcon color="white" className={styles.checkIcon} />
                             }
                             {
-                                !setting && !success && 'Set Goal'
+                                !setting && !success && <><img className={styles.saveIcon} src="/save-icon.svg" /><span className={styles.saveText}>Set Goal</span></>
                             }
                         </button>
                     </form>

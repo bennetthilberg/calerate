@@ -17,6 +17,8 @@ export default function ServingItem({ serving }) {
     const [editing, setEditing] = useState(false);
     const [success, setSuccess] = useState(false);
     const [open, setOpen] = useState(false);
+    const [deleting, setDeleting] = useState(false);
+    const [deleteSuccess, setDeleteSuccess] = useState(false);
     const router = useRouter();
     useEffect(() => {
         if (serving && servingSizeValue) {
@@ -63,6 +65,31 @@ export default function ServingItem({ serving }) {
             setEditing(false);
         }
     }
+    async function handleDelete(e) {
+        e.preventDefault();
+        console.log('Delete serving');
+        setDeleting(true);
+        
+        const res = await fetch('/api/delete-serving', {
+            method: 'DELETE',
+            body: JSON.stringify({ serving }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        if (res.ok) {
+            setDeleting(false);
+            setDeleteSuccess(true);
+            //router.refresh();
+            setTimeout(() => {
+                setDeleteSuccess(false);
+                setOpen(false);
+            }, 600);
+        } else {
+            console.error('Error deleting serving. Res:', res);
+            setDeleting(false);
+        }
+    }
     return (
         <Dialog.Root
             open={open}
@@ -104,9 +131,18 @@ export default function ServingItem({ serving }) {
                             <span>g</span>
                         </span>
                         <div className={styles.actions}>
-                            <span className={styles.delete}>
-                                <img src="/trash-icon-red.svg" />
-                                <span>Delete</span>
+                            <span className={styles.delete} onClick={(e) => handleDelete(e)}>
+                                {
+                                    !deleting && !deleteSuccess && <img src="/trash-icon-red.svg" />
+                                }
+                                {
+                                    deleting && <ClipLoader className={styles.deleteSpinner} speedMultiplier={1.4} color="hsl(2, 70%, 48%)" size={20} />
+                                }
+                                {
+                                    deleteSuccess && <CheckIcon color="green" className={styles.deleteCheckIcon} />
+                                }
+                                
+                                <span className={styles.deleteText}>Delete</span>
                             </span>
                             <button
                                 className='primary'

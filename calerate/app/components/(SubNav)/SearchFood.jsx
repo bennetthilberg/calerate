@@ -5,7 +5,7 @@ import styles from "./SearchFood.module.scss";
 import { PlusIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { ClipLoader } from "react-spinners";
 
-export default function SearchFood({ initialQuery }) {
+export default function SearchFood({ initialQuery, open }) {
     const [searchValue, setSearchValue] = useState("");
     const [isTyping, setIsTyping] = useState(initialQuery);
     const router = useRouter();
@@ -53,13 +53,14 @@ export default function SearchFood({ initialQuery }) {
     }
 
     return (
-        <form className={styles.searchFood} onSubmit={handleSubmit}>
+        <form data-open={open} className={styles.searchFood} onSubmit={handleSubmit}>
             <input
                 type="text"
                 placeholder="Search to add foods"
                 value={searchValue}
                 onChange={e => handleSearchChange(e)}
                 onFocus={e => e.target.select()}
+                autoFocus
             />
             <button type="submit">
                 {

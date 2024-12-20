@@ -1,4 +1,5 @@
 import AddServing from "../AddServing/AddServing";
+import ResultAddServing from "../AddServing/ResultAddServing";
 import styles from "./FoodSearchResult.module.scss";
 
 export default function FoodSearchResult({ food }) {
@@ -44,7 +45,7 @@ export default function FoodSearchResult({ food }) {
         if (typeof food?.description !== 'string' || food.description.trim() === '') {
             return null;
         }
-        if(food.description !== food.description.toUpperCase()) {
+        if (food.description !== food.description.toUpperCase()) {
             return food.description;
             // if it's already in a correct case, don't change it
         }
@@ -62,29 +63,35 @@ export default function FoodSearchResult({ food }) {
         return titleCased.join(' ');
     }
     const foodTitle = getFoodTitle();
-
     return (
-        <div className={styles.foodSearchResult}>
-            <h2>{foodTitle}</h2>
-            {
-                /* 
-            <p>
-                <span className="bold">{Math.round(calsPer100g)}</span> calories per 100g
-            </p>
-                */
-            }
-            <p className={styles.source}>
-                from: {food.dataType}
-            </p>
-            <AddServing food={
-                {
-                    ...food,
-                    calsPer100g,
-                    foodTitle
-                }
-            } />
-        </div>
+            <ResultAddServing 
+                food={{...food, calsPer100g, foodTitle}}
+            />
+
     )
+    /*
+        return (
+            <div className={styles.foodSearchResult}>
+                <div>
+                    <h3>{foodTitle}</h3>
+                    <p>
+                        <span>{calsPer100g} </span>calories per 100g
+                    </p>
+                </div>
+                <div>
+                    <AddServing food={
+                        {
+                            ...food,
+                            calsPer100g,
+                            foodTitle
+                        }
+                    } />
+    
+                </div>
+            </div>
+        )
+            */
+
 }
 /* 
     foods have a foodNutrients array of objects. we want the element

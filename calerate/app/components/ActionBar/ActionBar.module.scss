@@ -1,0 +1,96 @@
+$p1: hsl(197 92% 4%);
+$p2: hsl(197 95% 8%);
+$p3: hsl(197 89% 12%);
+$p4: hsl(197 95% 26%);
+$p5: hsl(197 80% 34%);
+$p6: hsl(197 89% 42%);
+$p7: hsl(197 82% 64%);
+$p8: hsl(197 89% 83%);
+$p9: hsl(197 92% 91%);
+$p10: hsl(197 100% 98%);
+$lightRed: hsl(2, 70%, 48%);
+$g1: hsl(210, 7%, 8%);
+$g2: hsl(210, 7%, 14%);
+$g3: hsl(210, 7%, 22%);
+$g4: hsl(210, 7%, 30%);
+$g5: hsl(210, 7%, 40%);
+$g6: hsl(210, 7%, 55%);
+$g7: hsl(210, 7%, 70%);
+$g8: hsl(210, 7%, 85%);
+$g9: hsl(210, 7%, 95%);
+
+.actionBar {
+    position: fixed;
+    bottom: 60px;
+    height: 64px;
+    width: 286px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $g8;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, .12), 0 5px 15px rgba(0, 0, 0, .1);
+    display: grid;
+    grid-template-columns: 1fr 74px 1fr;
+    grid-template-rows: 1fr;
+    place-items: center;
+
+    button {
+        flex-grow: 1;
+    }
+
+    .plus {
+        background-color: $p8;
+        color: darken($p4, 6%);
+        box-shadow: inset 0 1px 0 lighten($p8, 3%), 0 1px 3px hsla(197, 92, 4, 0.15);
+        align-self: center;
+        position: absolute;
+        bottom: -3px;
+        place-self: center;
+        width: 70px;
+        height: 70px;
+        margin-left: 2px;
+        margin-right: 2px;
+        border-radius: 35px;
+        padding: 0;
+        flex-grow: 0;
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+
+        //color: black;
+        //box-shadow: 0 4px 6px rgba(0,0,0,.15), 0 5px 15px rgba(0,0,0,.1);
+        svg {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    >:nth-child(1),
+    .log {
+        height: 100%;
+        width: 100%;
+        text-decoration: none;
+        background-color: $g8;
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-weight: 400;
+
+        img {
+            height: 30px;
+        }
+
+        span {
+            color: black;
+        }
+
+        padding: 6px;
+        gap: 1px;
+    }
+
+    .log {
+        grid-column: 3;
+    }
+}

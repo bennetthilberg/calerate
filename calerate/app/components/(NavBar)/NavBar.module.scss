@@ -19,6 +19,13 @@ $vanDyke: rgb(56, 48, 46);
         place-items: center;
         button{
             height: 100%;
+            background-color: rgb(40, 40, 40);
+            color: white;
+            border: 1.25px solid lighten(rgb(40, 40, 40), 9%);
+            border-radius: 5px;
+            padding: 5px;
+            padding-left: 8px;
+            padding-right: 8px;
         }
     }
     h1{
@@ -26,7 +33,7 @@ $vanDyke: rgb(56, 48, 46);
         font-weight: normal;
         font-size: 22.5px;
     }
-    background-color: $almostBlack;
+    background-color: white;
     padding: 1rem 2rem;
     color: #fff;
     font-size: 1.2rem;

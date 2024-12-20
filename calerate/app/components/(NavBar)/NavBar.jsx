@@ -3,6 +3,7 @@ import styles from "./NavBar.module.scss";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import getOrCreateToday from "@/utils/getOrCreateToday";
 
 async function handleSignOut() {
     'use server';
@@ -16,8 +17,15 @@ export default async function NavBar() {
     const supabase = await createClient()
     const userData = await supabase.auth.getUser();
     const user = userData?.data?.user;
+    const today = await getOrCreateToday();
     return (
         <div className={styles.navBar}>
+            {
+                today?.goal_calories > 0 &&
+                <p>
+                    <span>{today.goal_calories - (today.total_calories ?? 0)} </span>cals left
+                </p>
+            }
             <h1>Calerate</h1>
             {/*<SignInOut />*/}
             {user ?

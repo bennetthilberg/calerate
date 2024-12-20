@@ -1,9 +1,9 @@
 import NavBar from "./components/(NavBar)/NavBar";
 import SubNav from "./components/(SubNav)/SubNav";
+import ActionBar from "./components/ActionBar/ActionBar";
 import "./globals.scss";
 import { createClient } from "@/utils/supabase/server";
-import {Rubik} from 'next/font/google'
-import { Hanken_Grotesk } from "next/font/google";
+import {Open_Sans} from 'next/font/google'
 
 
 
@@ -12,8 +12,7 @@ export const metadata = {
   description: "Free, snappy calorie tracking",
 };
 
-const rubik = Rubik();
-const hankenGrotesk = Hanken_Grotesk();
+const openSans = Open_Sans();
 
 
 export default async function RootLayout({ children, searchParams }) {
@@ -23,10 +22,10 @@ export default async function RootLayout({ children, searchParams }) {
   const query = searchParams?.query ?? "";
   return (
     <html lang="en">
-      <body className={hankenGrotesk.className}>
+      <body className={openSans.className}>
         <NavBar />
-        {user && <SubNav initialQuery={query}/>}
         {children}
+        {user && <ActionBar />}
       </body>
     </html>
   );

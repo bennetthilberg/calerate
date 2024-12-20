@@ -1,0 +1,131 @@
+$green: rgb(27, 100, 60);
+$blackLicorice: rgb(22, 16, 18);
+$almostBlack: rgb(10, 10, 10);
+$vanDyke: rgb(56, 48, 46);
+$green: rgb(27, 100, 60);
+$blackLicorice: rgb(22, 16, 18);
+$almostBlack: rgb(10, 10, 10);
+$vanDyke: rgb(56, 48, 46);
+
+$p1: hsl(197 92% 4%);
+$p2: hsl(197 95% 8%);
+$p3: hsl(197 89% 12%);
+$p4: hsl(197 95% 26%);
+$p5: hsl(197 80% 34%);
+$p6: hsl(197 89% 42%);
+$p7: hsl(197 82% 64%);
+$p8: hsl(197 89% 83%);
+$p9: hsl(197 92% 91%);
+$p10: hsl(197 100% 98%);
+$lightRed: hsl(2, 70%, 48%);
+
+$g1: hsl(210, 7%, 8%);
+$g2: hsl(210, 7%, 14%);
+$g3: hsl(210, 7%, 22%);
+$g4: hsl(210, 7%, 30%);
+$g5: hsl(210, 7%, 40%);
+$g6: hsl(210, 7%, 55%);
+$g7: hsl(210, 7%, 70%);
+$g8: hsl(210, 7%, 85%);
+$g9: hsl(210, 7%, 95%);
+.overlay{
+    background-color: rgba(0, 0, 0, 0.35);
+    position: fixed;
+    inset: 0;
+    animation: fadeIn 0.05s ease-out;
+}
+.content{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    h2{
+        font-size: 22px;
+        margin: 0;
+    }
+    p{
+        font-size: 19px;
+        margin: 0;
+    }
+    .addInputHolder{
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        input{
+            font-size: 19px;
+            height: 40px;
+            width: 73px;
+            flex-grow: 0;
+            flex-shrink: 0;
+        }
+        span{
+            //margin: 0;
+            font-size: 19px;
+        }
+    }
+    button{
+        margin-top: 6px;
+        height: 40px;
+        font-size: 17px;
+    }
+    .closeButton{
+        position: absolute;
+        display: grid;
+        place-items: center;
+        margin: 0;
+        top: 8px;
+        right: 8px;
+        height: 37px;
+        width: 37px;
+        padding: 0;
+        background-color: rgba(0, 0, 0, 0.1);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        svg{
+            width: 18px;
+            height: 18px;
+        }
+    }
+}
+.foodSearchResult{
+    &:first-child{
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        border: 2px solid $p8;
+    }
+    background-color: $p9;
+    &:active{
+        background-color: lighten($p9, 5%);
+    }
+    transition: background-color 0.06s ease-out;
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    padding: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+    position: relative;
+    >h3{
+        font-size: 17px;
+        color: $p3;
+        font-weight: 500;
+        flex-grow: 1;
+        margin: 0;
+    }
+    >div:last-child{
+        width: fit-content;
+        flex-shrink: 0;
+        flex-grow: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        span{
+            color: $p3;
+        }
+        span.calsText{
+            font-weight: 600;
+        }
+    }
+    border-bottom: 2px solid $p8;
+}

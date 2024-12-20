@@ -1,50 +1,78 @@
-$green: rgb(27, 100, 60);
-$blackLicorice: rgb(22, 16, 18);
-$almostBlack: rgb(10, 10, 10);
-$vanDyke: rgb(56, 48, 46);
-.foodSearchResult{
-    //border: 1px solid gray;
-    border-bottom: 1.5px solid gray;
-    background-color: rgb(35, 35, 35);
+$p1: hsl(197 92% 4%);
+$p2: hsl(197 95% 8%);
+$p3: hsl(197 89% 12%);
+$p4: hsl(197 95% 26%);
+$p5: hsl(197 80% 34%);
+$p6: hsl(197 89% 42%);
+$p7: hsl(197 82% 64%);
+$p8: hsl(197 89% 83%);
+$p9: hsl(197 92% 91%);
+$p10: hsl(197 100% 98%);
+$lightRed: hsl(2, 70%, 48%);
+
+$g1: hsl(210, 7%, 8%);
+$g2: hsl(210, 7%, 14%);
+$g3: hsl(210, 7%, 22%);
+$g4: hsl(210, 7%, 30%);
+$g5: hsl(210, 7%, 40%);
+$g6: hsl(210, 7%, 55%);
+$g7: hsl(210, 7%, 70%);
+$g8: hsl(210, 7%, 85%);
+$g9: hsl(210, 7%, 95%);
+
+.foodSearchResult {
     padding: 4px;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
     height: auto;
-    max-height: 100px;
-    //font-family: Helvetica, sans-serif;
     display: flex;
-    gap: 12px;
-    position: relative;
-    h2{
-        font-size: 18px;
-        color: white;
-        font-weight: normal;
-    }
-    p{
-        font-size: 18px
-    }
-    p.source{
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        opacity: 0.7;
-        font-size: 16px;
-    }
-    h2, p{
-        margin: 0;
-    }
-    button{
-        height: 41px;
-        width: 60px;
-        background-color: white;
-        border: 1.5px solid black;
-        background-color: rgb(220, 220, 220);
-        border-radius: 8px;
-        font-size: 17.5px;
-        font-weight: bold;
-        &:active{
-            filter: brightness(1.05);
+    align-items: center;
+    background-color: white;
+    div:first-child {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        h3{
+            font-size: 16px;
+            color: black;
+            font-weight: 600;
+            margin: 0;
+            line-height: 21px;
+        }
+        p{
+            margin: 0;
+            font-weight: 400;
+            color: $g4;
+            span{
+                color: inherit;
+                font-weight: 600;
+            }
         }
     }
-    align-items: center;
+
+    >div:last-child {
+        margin-left: auto;
+        flex-basis: 110px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        button {
+            width: 100%;
+            height: 38px;
+            
+        }
+
+        h4 {
+            color: $g3;
+            margin: 0;
+            font-weight: 400;
+            span{
+                color: inherit;
+            }
+        }
+    }
 }

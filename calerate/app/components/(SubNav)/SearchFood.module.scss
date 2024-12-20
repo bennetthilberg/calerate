@@ -2,56 +2,94 @@ $green: rgb(27, 100, 60);
 $blackLicorice: rgb(22, 16, 18);
 $almostBlack: rgb(10, 10, 10);
 $vanDyke: rgb(56, 48, 46);
+$green: rgb(27, 100, 60);
+$blackLicorice: rgb(22, 16, 18);
+$almostBlack: rgb(10, 10, 10);
+$vanDyke: rgb(56, 48, 46);
+$green: rgb(27, 100, 60);
+$blackLicorice: rgb(22, 16, 18);
+$almostBlack: rgb(10, 10, 10);
+$vanDyke: rgb(56, 48, 46);
+
+$p1: hsl(197 92% 4%);
+$p2: hsl(197 95% 8%);
+$p3: hsl(197 89% 12%);
+$p4: hsl(197 95% 26%);
+$p5: hsl(197 80% 34%);
+$p6: hsl(197 89% 42%);
+$p7: hsl(197 82% 64%);
+$p8: hsl(197 89% 83%);
+$p9: hsl(197 92% 91%);
+$p10: hsl(197 100% 98%);
+$lightRed: hsl(2, 70%, 48%);
+
+$g1: hsl(210, 7%, 8%);
+$g2: hsl(210, 7%, 14%);
+$g3: hsl(210, 7%, 22%);
+$g4: hsl(210, 7%, 30%);
+$g5: hsl(210, 7%, 40%);
+$g6: hsl(210, 7%, 55%);
+$g7: hsl(210, 7%, 70%);
+$g8: hsl(210, 7%, 85%);
+$g9: hsl(210, 7%, 95%);
 .searchFood {
-    font-family: Helvetica, sans-serif;
-    background-color: lighten($almostBlack, 6%);
-    border: 2px solid lighten($almostBlack, 24%);
-    border-radius: 19px;
-    
-    height: 42px;
+   
+
+
+    border-radius: 10px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 24px;
+    height: 48px;
     flex-grow: 1;
     color: white;
     //margin: 8px;
-    width: 170px;
-    padding-left: 2px;
+    width: 100%;
+    max-width: calc(100vw - 16px);
+    padding-left: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    transition: box-shadow 0.08s ease-out;
+    border: 2px solid $g8;
+    padding: 0;
+    box-sizing: border-box;
     input {
+        font-family: inherit;
+        box-sizing: border-box;
         flex-grow: 1;
         border: none;
-        width: calc(100% - 30px);
-        background-color: transparent;
+        font-size: 16px;
+        background-color: white;
         height: 100%;
-        border-top-left-radius: 19px;
-        border-bottom-left-radius: 19px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
         &:focus-visible {
             outline: none;
         }
         padding-left: 10px;
         padding-right: 1.5px;
-        color: white;
+        color: $p1;
     }
 
     button {
-        width: 32px;
+        width: 48px;
+        flex-grow: 0;
+        flex-shrink: 0;
         padding: 0;
-        
         height: 100%;
-        padding: none;
-        border-top-right-radius: 13px;
-        border-bottom-right-radius: 13px;
+        border-radius: 0px;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
         outline: none;
         border: none;
-        background-color: lighten($almostBlack, 24%);
+        background-color: $p7;
         display: grid;
         place-items: center;
+        color: white;
         svg{
-            filter: invert(100%);
-            width: 20px;
-            height: 20px;
+            filter: brightness(1);
+            width: 24px;
+            height: 24px;
             margin-right: -1px;
             
         }

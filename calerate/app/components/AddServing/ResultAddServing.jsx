@@ -1,13 +1,13 @@
 'use client';
 import * as Dialog from "@radix-ui/react-dialog";
-import styles from './AddServing.module.scss';
+import styles from './ResultAddServing.module.scss';
 import { useEffect, useState } from "react";
 import { Cross1Icon, CheckIcon } from "@radix-ui/react-icons";
 import { ClipLoader } from "react-spinners";
 import { useRouter } from "next/navigation";
 //import { addServingAction } from "./actions";
 
-export default function AddServing({ food }) {
+export default function ResultAddServing({ food }) {
     const [servingSizeValue, setServingSizeValue] = useState('');
     const [totalCalories, setTotalCalories] = useState(0);
     const [adding, setAdding] = useState(false);
@@ -41,7 +41,7 @@ export default function AddServing({ food }) {
     }
     async function handleLog(e) {
         e.preventDefault();
-        if(!logOk) return;
+        if (!logOk) return;
         setAdding(true);
         const res = await fetch('/api/add-serving', {
             method: "POST",
@@ -75,9 +75,14 @@ export default function AddServing({ food }) {
     return (
         <Dialog.Root open={open} onOpenChange={() => setOpen(!open)}>
             <Dialog.Trigger asChild>
-                <button className="primary">
-                    Add
-                </button>
+                <div className={styles.foodSearchResult}>
+                    <h3>{food.foodTitle}</h3>
+
+                    <div>
+                        <span className={styles.calsText}>{food.calsPer100g} cals</span>
+                        <span>per 100g</span>
+                    </div>
+                </div>
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className={`${styles.overlay} overlay`} />

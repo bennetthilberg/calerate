@@ -1,0 +1,7 @@
+.searchFood{
+    position: fixed;
+    top: 45px;
+    &.closed{
+        display: none;
+    }
+}

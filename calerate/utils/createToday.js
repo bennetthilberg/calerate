@@ -15,11 +15,11 @@ export default async function createToday(){
                 total_calories: 0,
             }
         ]);
-    if(error){
-        console.error('Error creating today:', error);
+    if(daysError){
+        console.error('Error creating today:', daysError);
         return null;
     }
-    if(!daysData[0]){
+    if(!daysData || !daysData?.length > 0){
         console.error('Error creating today: no data returned');
         console.log('daysData:', daysData);
         return null;

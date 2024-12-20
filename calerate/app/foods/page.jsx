@@ -6,6 +6,7 @@ import ServingItem from "./ServingItem";
 import Link from "next/link";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 import EditGoalCalories from "../components/ManageGoalCalories/EditGoalCalories";
+import EditServing from "./EditServing";
 
 export const revalidate = 1;
 
@@ -45,18 +46,20 @@ export default async function Foods() {
         <div className={styles.foods}>
             <h1>Today's Foods</h1>
             <p className={styles.dateText}>
-                {new Intl.DateTimeFormat('en-US', {
-                    weekday: 'long',
-                    month: 'long',
-                    day: 'numeric'
-                }).format(new Date())}
-            </p>
-            <Link href={'/food-history'} className={styles.prevDays}>
                 <span>
-                    View previous days
+                    {new Intl.DateTimeFormat('en-US', {
+                        weekday: 'long',
+                        month: 'long',
+                        day: 'numeric'
+                    }).format(new Date())}
                 </span>
-                <ChevronRightIcon />
-            </Link>
+                <Link href={'/food-history'} className={styles.prevDays}>
+                    <span>
+                        View previous days
+                    </span>
+                </Link>
+            </p>
+
             {today?.goal_calories ?
                 <div className={styles.caloriesLeftDisplay}>
                     <h2 className={styles.remaining}>

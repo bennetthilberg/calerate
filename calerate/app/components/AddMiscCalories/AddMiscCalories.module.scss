@@ -17,15 +17,7 @@ $vanDyke: rgb(56, 48, 46);
     }
 }
 .triggerButton{
-    background-color: lighten($blackLicorice, 20%);
-    border: 1.25px solid lighten($blackLicorice, 35%);
-    border-radius: 5px;
-    color: darken(white, 5%);
-    span{
-        color: inherit;
-    }
     height: 40px;
-    min-width: 175px;
     font-size: 16px;
     display: flex;
     align-items: center;

@@ -3,60 +3,67 @@ $blackLicorice: rgb(22, 16, 18);
 $almostBlack: rgb(10, 10, 10);
 $vanDyke: rgb(56, 48, 46);
 
+$p1: hsl(197 92% 4%);
+$p2: hsl(197 95% 8%);
+$p3: hsl(197 89% 12%);
+$p4: hsl(197 95% 26%);
+$p5: hsl(197 80% 34%);
+$p6: hsl(197 89% 42%);
+$p7: hsl(197 82% 64%);
+$p8: hsl(197 89% 83%);
+$p9: hsl(197 92% 91%);
+$p10: hsl(197 100% 98%);
+$lightRed: hsl(2, 70%, 48%);
+
+$g1: hsl(210, 7%, 8%);
+$g2: hsl(210, 7%, 14%);
+$g3: hsl(210, 7%, 22%);
+$g4: hsl(210, 7%, 30%);
+$g5: hsl(210, 7%, 40%);
+$g6: hsl(210, 7%, 55%);
+$g7: hsl(210, 7%, 70%);
+$g8: hsl(210, 7%, 85%);
+$g9: hsl(210, 7%, 95%);
+
 .servingItem{
     &:first-child{
         border-top-left-radius: 6px;
         border-top-right-radius: 6px;
-        border-top: 1.5px solid lighten($almostBlack, 20%);
     }
     &:last-child{
         border-bottom-left-radius: 6px;
         border-bottom-right-radius: 6px;
     }
-    background-color: lighten($almostBlack, 10%);
-    padding: 12px;
-    border: 1.5px solid lighten($almostBlack, 20%);
+    background-color: $p8;
+    &:active{
+        background-color: lighten($p8, 5%);
+    }
+    transition: background-color 0.06s ease-out;
+    //border: 2px solid $g7;
+    padding: 16px;
     border-top: none;
     height: auto;
     display: flex;
+    flex-direction: column;
     gap: 10px;
+    justify-content: flex-start;
+    border-bottom: 2px solid $g7;
     h3, p{
         margin: 0;
-        font-weight: normal;
+        text-align: left;
     }
-    h3.servingName{
+    h3{
+        font-size: 18px;
+        color: $g1;
+        font-weight: 500;
+    }
+    p{
+        width: fit-content;
+        color: $g2;
         font-size: 17px;
-        margin-bottom: 8px;
-        height: auto;
-    }
-    p.amount{
-        font-size: 16px;
-        color: darken(white, 15%);
-        .caloriesText{
-            color: inherit;
-            font-weight: bold;
-        }
-    }
-    .actions, .info{
-        flex-grow: 1;
-        display: flex;
-        //align-items: center;
-    }
-    .info{
-        flex-direction: column;
-        justify-content: center;
-
-    }
-    .actions{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: flex-end;
-        justify-content: center;
-        button{
-            width: 90px;
-            height: 34px;
-            padding: 0 10px;
+        span{
+            font-weight: 500;
+            color: $g1;
         }
     }
 }

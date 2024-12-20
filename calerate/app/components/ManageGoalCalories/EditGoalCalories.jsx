@@ -60,10 +60,10 @@ export default function EditGoalCalories({ goalCalories, totalCalories }) {
         >
             <Dialog.Trigger asChild>
                 <button
-                    className={styles.editGoalButton}
+                    className={`primary ${styles.editGoalButton}`}
                 >
-                    <span>Edit goal calories</span>
                     <Pencil1Icon/>
+                    <span>Edit goal</span>
                 </button>
             </Dialog.Trigger>
             <Dialog.Portal>

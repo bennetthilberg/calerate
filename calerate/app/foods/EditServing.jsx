@@ -5,6 +5,7 @@ import { Cross1Icon, Pencil1Icon } from "@radix-ui/react-icons";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { ClipLoader } from "react-spinners";
 import styles from "./EditServing.module.scss";
+import ServingItem from "./ServingItem";
 import { useRouter } from "next/navigation";
 
 export default function EditServing({ serving }) {
@@ -66,10 +67,7 @@ export default function EditServing({ serving }) {
             onCloseAutoFocus={e => e.preventDefault()}
         >
             <Dialog.Trigger asChild>
-                <button className={styles.triggerButton}>
-                    Edit
-                    <Pencil1Icon />
-                </button>
+                <ServingItem serving={serving} />
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className={'overlay'} />

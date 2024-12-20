@@ -64,11 +64,11 @@ export default function AddMiscCalories() {
             onCloseAutoFocus={e => e.preventDefault()}
         >
             <Dialog.Trigger asChild>
-                <button className={styles.triggerButton}>
-                    <span>
-                    Add Misc. Calories
-                    </span>
+                <button className={`primary ${styles.triggerButton}`}>
                     <PlusIcon />
+                    <span>
+                    Add calories
+                    </span>
                 </button>
             </Dialog.Trigger>
             <Dialog.Portal>

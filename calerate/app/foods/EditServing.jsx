@@ -1,5 +1,5 @@
 'use client';
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Cross1Icon, Pencil1Icon } from "@radix-ui/react-icons";
 import { CheckIcon } from "@radix-ui/react-icons";
@@ -7,6 +7,7 @@ import { ClipLoader } from "react-spinners";
 import styles from "./EditServing.module.scss";
 import ServingItem from "./ServingItem";
 import { useRouter } from "next/navigation";
+
 
 export default function EditServing({ serving }) {
     const [servingSizeValue, setServingSizeValue] = useState(serving.amount);
@@ -47,7 +48,7 @@ export default function EditServing({ serving }) {
                 'Content-Type': 'application/json'
             }
         });
-        if(res.ok){
+        if (res.ok) {
             setEditing(false);
             setSuccess(true);
             router.refresh();
@@ -77,10 +78,8 @@ export default function EditServing({ serving }) {
                     className="dialogContent"
                 >
                     <form className={styles.content} onSubmit={e => handleEdit(e)}>
-                        <Dialog.Close asChild>
-                            <button className={styles.closeButton}>
-                                <Cross1Icon />
-                            </button>
+                        <Dialog.Close className="dialogCloseButton">
+                            <Cross1Icon />
                         </Dialog.Close>
                         <Dialog.Title className={styles.title}>
                             {serving.name}
@@ -98,7 +97,7 @@ export default function EditServing({ serving }) {
                             <span>g</span>
                         </span>
                         <button
-                            className={styles.logButton}
+                            className={`primary ${styles.logButton}`}
                             type="submit"
                         >
                             {

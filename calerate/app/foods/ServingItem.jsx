@@ -80,19 +80,19 @@ export default function ServingItem({ serving }) {
                 <Dialog.Content
                     asChild
                     aria-describedby={undefined}
-                    className="dialogContent"
                 >
-                    <form className={styles.content} onSubmit={e => handleEdit(e)}>
+                    <form className={`${styles.dialogContent} dialogContent`} onSubmit={e => handleEdit(e)}>
                         <Dialog.Close asChild>
-                            <button className={styles.closeButton}>
+                            <button className="dialogCloseButton">
                                 <Cross1Icon />
                             </button>
                         </Dialog.Close>
                         <Dialog.Title className={styles.title}>
                             {serving.name}
                         </Dialog.Title>
-                        <p>
-                            {Math.round(totalCalories)} calories
+                        <p className={styles.calories}>
+                            <span>{Math.round(totalCalories)}</span> calories
+
                         </p>
                         <span className={styles.addInputHolder}>
                             <input type="tel"
@@ -103,20 +103,26 @@ export default function ServingItem({ serving }) {
                             />
                             <span>g</span>
                         </span>
-                        <button
-                            className={styles.logButton}
-                            type="submit"
-                        >
-                            {
-                                editing && <ClipLoader className={styles.spinner} speedMultiplier={1.4} color="blue" size={21.25} />
-                            }
-                            {
-                                success && <CheckIcon color="green" className={styles.checkIcon} />
-                            }
-                            {
-                                !editing && !success && 'Save changes'
-                            }
-                        </button>
+                        <div className={styles.actions}>
+                            <span className={styles.delete}>
+                                <img src="/trash-icon-red.svg" />
+                                <span>Delete</span>
+                            </span>
+                            <button
+                                className='primary'
+                                type="submit"
+                            >
+                                {
+                                    editing && <ClipLoader className={styles.spinner} speedMultiplier={1.4} color="white" size={24} />
+                                }
+                                {
+                                    success && <CheckIcon color="white" className={styles.checkIcon} />
+                                }
+                                {
+                                    !editing && !success && <><img className={styles.saveIcon} src="/save-icon.svg" /><span className={styles.saveText}>Save</span></>
+                                }
+                            </button>
+                        </div>
                     </form>
                 </Dialog.Content>
             </Dialog.Portal>

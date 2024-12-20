@@ -1,15 +1,13 @@
 .content{
-    width: 300px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
     h2{
         font-size: 22px;
         margin: 0;
     }
     p{
         font-size: 19px;
-        margin: 0;
+        margin: 12;
     }
     .addInputHolder{
         display: flex;

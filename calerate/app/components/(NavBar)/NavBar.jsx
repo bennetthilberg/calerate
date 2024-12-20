@@ -4,6 +4,7 @@ import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import getOrCreateToday from "@/utils/getOrCreateToday";
+import SignOutLink from "./SignOutLink";
 
 async function handleSignOut() {
     'use server';
@@ -29,12 +30,20 @@ export default async function NavBar() {
             <h1>Calerate</h1>
             {/*<SignInOut />*/}
             {user ?
-                <form className={styles.logInOut} action={handleSignOut}>
-                    <button type="submit">Sign Out</button>
-                </form>
+                <SignOutLink handleSignOut={handleSignOut} />
                 :
                 <Link className={styles.logInOut} href='login'>Log in</Link>
             }
         </div>
+        
     )
+    
 }
+
+/*
+
+                <form className={styles.logInOut} action={handleSignOut}>
+                <button type="submit">Sign Out</button>
+                </form>
+                
+*/

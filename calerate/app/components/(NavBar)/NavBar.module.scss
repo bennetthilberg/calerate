@@ -3,16 +3,59 @@ $blackLicorice: rgb(22, 16, 18);
 $almostBlack: rgb(10, 10, 10);
 $vanDyke: rgb(56, 48, 46);
 
+$p1: hsl(197 92% 4%);
+$p2: hsl(197 95% 8%);
+$p3: hsl(197 89% 12%);
+$p4: hsl(197 95% 26%);
+$p5: hsl(197 80% 34%);
+$p6: hsl(197 89% 42%);
+$p7: hsl(197 82% 64%);
+$p8: hsl(197 89% 83%);
+$p9: hsl(197 92% 91%);
+$p10: hsl(197 100% 98%);
+$lightRed: hsl(2, 70%, 48%);
+
+$g1: hsl(210, 7%, 8%);
+$g2: hsl(210, 7%, 14%);
+$g3: hsl(210, 7%, 22%);
+$g4: hsl(210, 7%, 30%);
+$g5: hsl(210, 7%, 40%);
+$g6: hsl(210, 7%, 55%);
+$g7: hsl(210, 7%, 70%);
+$g8: hsl(210, 7%, 85%);
+$g9: hsl(210, 7%, 95%);
+
+
 .navBar{
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     height: 46px;
+    p{
+        position: absolute;
+        left: 12px;
+        color: $p1;
+        margin: 0;
+        font-size: 16px;
+        font-weight: 400;
+        span{
+            font-weight: 600;
+        }
+    }
+    a{
+        right: 12px;
+        position: absolute;
+        margin: 0;
+        text-decoration: none;
+        color: $p4;
+        font-size: 17px;
+        font-weight: 400;
+    }
     form.logInOut{
         height: 25px;
-        position: absolute;
-        top: 50%;
+        //position: absolute;
+        //top: 50%;
         transform: translateY(-50%);
         right: 0.6rem;
         display: grid;

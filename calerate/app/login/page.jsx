@@ -3,46 +3,93 @@ import { login, signup } from './actions'
 import Link from 'next/link'
 import { useState } from 'react';
 import styles from "./LoginPage.module.scss"
-
+import { ClipLoader } from 'react-spinners';
+import validateEmail from '@/utils/validateEmail';
+import { useRouter } from 'next/navigation';
 
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  function handleLogin(){
+  const [passwordFocused, setPasswordFocused] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null);
+  const [errorText, setErrorText] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  function handleLogin(e){
+    e.preventDefault();
+    setLoading(true);
+    if(!validateEmail(email)){
+      setError(true);
+      setErrorText('Please enter a valid email');
+      setLoading(false);
+      return;
+    }
+    if(!password || password?.length < 6){
+      setError(true);
+      setErrorText('Please enter a valid password');
+      setLoading(false);
+      return;
+    }
+    setError(false);
+    setErrorText(null);
+    
     login(email, password).then(res => {
       if(res.ok){
-        window.location.href = '/'
+        router.push('/')
       }
+    }).catch(err => {
+      console.error(err);
+      setError(true);
+      setErrorText(err.message);
+      setLoading(false);
     })
+  }
+  function handleSignup(e){
+    e.preventDefault();
+    router.push('/signup')
   }
   return (
     <form className={styles.loginForm}>
-      <h2>Welcome back</h2>
-      <p>Sign in to your Calerate account</p>
+      <h2>Welcome to Calerate</h2>
+      <p>Sign in to your account</p>
       
-      <label htmlFor="email">Email:</label>
+      <label htmlFor="email">Email</label>
       <input id="email" name="email" type="email"
         autoComplete='email'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        data-valid={validateEmail(email)}
         required />
-      <label htmlFor="password">Password:</label>
-      <input id="password" name="password" type="password"
+      <label htmlFor="password">Password</label>
+      <input id="password" name="password" type={passwordFocused ? "text" : "password"}
         autoComplete="current-password"
         value={password}
+        onFocus={() => setPasswordFocused(true)}
+        onBlur={() => setPasswordFocused(false)}
         onChange={(e) => setPassword(e.target.value)}
+        data-valid={password?.length >= 6}
         required />
-      <button className={styles.login} formAction={() => handleLogin()}>Log in</button>
-      <p>
-        Don't have an account? <Link prefetch={true} href="/signup">Sign up</Link>
-      </p>
-      {/* 
-      <p>
-        Don't have an account?
-      </p>
-      <button className={styles.signup} formAction={signup}>Sign up</button>
-        */}
+      <div data-error={error} className={styles.errorRow}>
+        {errorText && errorText}
+      </div>
+      <button className={`primary ${styles.loginButton}`} onClick={e => handleLogin(e)}>
+      {
+            loading && <ClipLoader speedMultiplier={1.5} size={28} color={"#fff"} />
+          }
+          {
+            !loading && <span>Log in</span>
+          }
+      </button>
+      <div className={styles.registerRow}>
+        <span>Don't have an account?</span>
+        <button onClick={e => handleSignup(e)} className="secondary">
+          Sign up
+        </button>
+      </div>
+      
+      
     </form>
   )
 }

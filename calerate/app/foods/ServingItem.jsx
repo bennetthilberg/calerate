@@ -99,7 +99,12 @@ export default function ServingItem({ serving }) {
             <Dialog.Trigger asChild>
                 <div className={styles.servingItem}>
                     <h3 className={styles.servingName}>{serving.name}</h3>
-                    <p className={styles.amount}>{serving.amount}{serving.amount_unit} - <span className={styles.caloriesText}>{Math.round(serving.calories)} calories</span></p>
+                    {
+                        serving.fdc_id == 0 ?
+                        <p className={styles.amount}><span className={styles.caloriesText}>{Math.round(serving.calories)} calories</span></p> :
+                        <p className={styles.amount}>{serving.amount}{serving.amount_unit} - <span className={styles.caloriesText}>{Math.round(serving.calories)} calories</span></p>
+                    }
+                    
                 </div>
             </Dialog.Trigger>
             <Dialog.Portal>

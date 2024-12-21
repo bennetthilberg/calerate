@@ -76,7 +76,7 @@ export default async function Foods() {
                     </div>
                     <p className={styles.figuresText}>
                         <span>
-                            {`${today.total_calories} `}
+                            {`${today?.total_calories ?? 0} `}
                         </span>
                         consumed of
                         <span>

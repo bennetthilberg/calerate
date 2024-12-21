@@ -74,10 +74,9 @@ form.loginForm{
         }
     }
     .errorRow{
-        height: 0;
+        height: fit-content;
         margin: 0;
         &[data-error="true"]{
-            height: 24px;
             margin-top: 0;
             margin-bottom: 8px;
             color: $lightRed;

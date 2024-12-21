@@ -37,7 +37,7 @@ export default function LoginPage() {
     
     login(email, password).then(res => {
       if(res.ok){
-        router.push('/')
+        router.push('/foods')
       }
     }).catch(err => {
       console.error(err);
@@ -52,8 +52,8 @@ export default function LoginPage() {
   }
   return (
     <form className={styles.loginForm}>
-      <h2>Welcome to Calerate</h2>
-      <p>Sign in to your account</p>
+      <h2>Log in to Calerate</h2>
+      <p>Welcome back! Log in to get started</p>
       
       <label htmlFor="email">Email</label>
       <input id="email" name="email" type="email"

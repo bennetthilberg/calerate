@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 import EditGoalCalories from "../components/ManageGoalCalories/EditGoalCalories";
 import EditServing from "./EditServing";
+import getOrCreateToday from "@/utils/getOrCreateToday";
 
 export const revalidate = 1;
 
@@ -21,14 +22,8 @@ async function getTodayAndServings() {
         .select('*')
         .eq('user_id', user.id)
         .eq('date', new Date().toISOString().split('T')[0]);
-    let today;
-    if (daysData.length === 0 || !daysData) {
-        console.log('no day data found, creating today...');
-        today = await createToday();
-    } else {
-        console.log('day data found:', daysData[0]);
-        today = daysData[0];
-    }
+    const today = await getOrCreateToday();
+    
     // get today's servings
     const { data: servingsData } = await supabase
         .from('servings')

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
+import getOrCreateToday from "@/utils/getOrCreateToday";
 
 export async function POST(req) {
     const {calories} = await req.json();
@@ -11,18 +12,7 @@ export async function POST(req) {
         const user = userData?.data?.user;
         if(!user) throw new Error('No user found');
 
-        let today;
-        const { data: daysData } = await supabase
-            .from('days')
-            .select('*')
-            .eq('user_id', user.id)
-            .eq('date', new Date().toISOString().split('T')[0]);
-        if (daysData.length === 0 || !daysData){
-            today = await createToday();
-        }
-        else {
-            today = daysData[0];
-        }
+        const today = await getOrCreateToday();
 
         const { error: insertError } = await supabase
             .from('servings')

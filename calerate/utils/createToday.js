@@ -14,11 +14,13 @@ export default async function createToday(){
                 date: new Date().toISOString().split('T')[0],
                 total_calories: 0,
             }
-        ]);
+        ])
+        .select('*');
     if(daysError){
         console.error('Error creating today:', daysError);
         return null;
     }
+    console.log('daysData:', daysData);
     if(!daysData || !daysData?.length > 0){
         console.error('Error creating today: no data returned');
         console.log('daysData:', daysData);

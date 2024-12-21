@@ -1,37 +1,130 @@
-form.signupForm{
+$green: rgb(27, 100, 60);
+$blackLicorice: rgb(22, 16, 18);
+$almostBlack: rgb(10, 10, 10);
+$vanDyke: rgb(56, 48, 46);
+
+$p1: hsl(197 92% 4%);
+$p2: hsl(197 95% 8%);
+$p3: hsl(197 89% 12%);
+$p4: hsl(197 95% 26%);
+$p5: hsl(197 80% 34%);
+$p6: hsl(197 89% 42%);
+$p7: hsl(197 82% 64%);
+$p8: hsl(197 89% 83%);
+$p9: hsl(197 92% 91%);
+$p10: hsl(197 100% 98%);
+$lightRed: hsl(2, 70%, 48%);
+
+
+$g1: hsl(210, 7%, 8%);
+$g2: hsl(210, 7%, 14%);
+$g3: hsl(210, 7%, 22%);
+$g4: hsl(210, 7%, 30%);
+$g5: hsl(210, 7%, 40%);
+$g6: hsl(210, 7%, 55%);
+$g7: hsl(210, 7%, 70%);
+$g8: hsl(210, 7%, 85%);
+$g9: hsl(210, 7%, 95%);
+
+form.signUpForm {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 24px;
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: calc(100vw - 32px);
+    max-width: 360px;
     padding: 18px;
-    border: 1px solid black;
+    background-color: white;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .08);
     border-radius: 6px;
-    gap: 4px;
-    h2, p{
+
+    h2 {
         margin: 0;
-        text-align: center;
-    }
-    p:first-of-type{
-        margin-bottom: 14px;
-    }
-    input{
-        height: 30px;
-        font-size: 17px;
-        &[type="password"]{
-            margin-bottom: 18px;
-        }
-    }
-    p:last-of-type{
-        margin-top: 6px;
-        text-align: center;
-    }
-    button.login{
-        height: 40px;
+        align-self: center;
+        font-weight: 500;
+        color: $p2;
+        font-size: 24px;
         margin-bottom: 8px;
     }
-    button.signup{
-        height: 35px;
+
+    p:first-of-type {
+        align-self: center;
+        text-align: center;
+        margin: 0;
+        color: $p3;
+        margin-bottom: 24px;
+    }
+
+    label {
+        color: $g5;
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+
+    input {
+        font-family: inherit;
+        height: 48px;
+        padding: 0 12px;
+        font-size: 17px;
+        border-radius: 4px;
+        border: 2px solid $g7;
+        margin-bottom: 24px;
+
+        &[data-valid="true"] {
+            border: 2px solid $p6;
+        }
+
+        transition: border 0.08s ease-out;
+
+        &:focus {
+            outline: 1px dotted $p7;
+            outline-offset: 1px;
+        }
+        &.passwordInput{
+            margin-bottom: 6px;
+        }
+    }
+
+    .errorRow {
+        height: fit-content;
+        margin: 0;
+
+        &[data-error="true"] {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: $lightRed;
+        }
+
+        transition: margin 0.08s ease-out,
+        height 0.08s ease-out;
+    }
+
+    .passwordHint {
+        color: $g5;
+        font-size: 16px;
+        margin: 0;
+        margin-bottom: 24px;
+    }
+
+    .signUpButton {
+        margin-top: 12px;
+        height: 48px;
+        font-size: 20px;
+        margin-bottom: 32px;
+        display: grid;
+        place-items: center;
+    }
+
+    .registerRow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+
+        button {
+            width: 100px;
+            height: 38px;
+        }
     }
 }

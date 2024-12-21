@@ -13,7 +13,17 @@ export default function AddMiscCalories() {
     const [adding, setAdding] = useState(false);
     const [success, setSuccess] = useState(false);
     const [open, setOpen] = useState(false);
+    const [valid, setValid] = useState(false);
     const router = useRouter();
+
+    useEffect(() => {
+        if(isNaN(Number(calories)) || Number(calories) <= 0) {
+            setValid(false);
+        }
+        else {
+            setValid(true);
+        }
+    })
 
     useEffect(() => {
         if (open) {
@@ -21,9 +31,9 @@ export default function AddMiscCalories() {
             setAdding(false);
             setSuccess(false);
         }
-    },[open]);
+    }, [open]);
 
-    async function handleAdd(e){
+    async function handleAdd(e) {
         e.preventDefault();
         setAdding(true);
         const caloriesNum = Number(calories);
@@ -42,7 +52,7 @@ export default function AddMiscCalories() {
             body: JSON.stringify({ calories: caloriesNum }),
         })
         console.log('res:', res);
-        if(res.ok){
+        if (res.ok) {
             router.refresh();
             setAdding(false);
             setSuccess(true);
@@ -51,7 +61,7 @@ export default function AddMiscCalories() {
                 setOpen(false);
             }, 800);
         }
-        else{
+        else {
             console.error('Error adding misc. calories');
             setAdding(false);
         }
@@ -67,30 +77,24 @@ export default function AddMiscCalories() {
                 <button className={`primary ${styles.triggerButton}`}>
                     <PlusIcon />
                     <span>
-                    Add calories
+                        Add calories
                     </span>
                 </button>
             </Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Overlay className="overlay" />
-                <Dialog.Content className={`dialogContent ${styles.content}`} aria-describedby={undefined}>
-                    <VisuallyHidden>
-                        <Dialog.Title>Add Misc. Calories</Dialog.Title>
-                    </VisuallyHidden>
-                    <Dialog.Close asChild>
-                        <button className='dialogCloseButton'>
-                            <Cross1Icon />
-                        </button>
-                    </Dialog.Close>
-                    <form className={styles.entryForm}
-                        onSubmit={e => handleAdd(e)}
-                    >
-                        <h2>
-                            Add Miscellaneous Calories
-                        </h2>
+                <Dialog.Content asChild aria-describedby={undefined}>
+                    <form className={`dialogContent ${styles.content}`} onSubmit={e => handleAdd(e)}>
+                        <Dialog.Close asChild>
+                            <button className='dialogCloseButton'>
+                                <Cross1Icon />
+                            </button>
+                        </Dialog.Close>
+                        <Dialog.Title>Add Miscellaneous Calories</Dialog.Title>
                         <div className={styles.inputHolder}>
                             <input
                                 type="tel"
+                                autoFocus
                                 maxLength={6}
                                 id="calories"
                                 value={calories}
@@ -100,15 +104,15 @@ export default function AddMiscCalories() {
                                 calories
                             </span>
                         </div>
-                        <button type='submit'>
+                        <button data-available={valid} className={`primary ${styles.addButton}`} type='submit'>
                             {
-                                adding && <ClipLoader className={styles.spinner} speedMultiplier={1.4} color="blue" size={21.25} />
+                                adding && <ClipLoader className={styles.spinner} speedMultiplier={1.4} color="white" size={24} />
                             }
                             {
-                                success && <CheckIcon color="green" className={styles.checkIcon} />
+                                success && <CheckIcon color="white" className={styles.checkIcon} />
                             }
                             {
-                                !adding && !success && 'Add'
+                                !adding && !success && <><img className={styles.plusIcon} src="/plus-icon-white.svg" /><span className={styles.saveText}>Add</span></>
                             }
                         </button>
                     </form>

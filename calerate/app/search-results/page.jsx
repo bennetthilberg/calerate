@@ -12,42 +12,33 @@ export default async function SearchResults({ searchParams }) {
     const { query: rawQuery } = await searchParams || '';
     const query = rawQuery?.trim();
 
-    if (!searchParams || !query) {
-        return (
-            <SearchFood />
-        )
+
+
+    let foods;
+    let foundationFoods;
+    let legacyFoods;
+    let surveyFoods;
+    let brandedFoods;
+    if (query) {
+        [foundationFoods, legacyFoods, surveyFoods, brandedFoods] = await Promise.all([
+            searchFoodsByType(query, "Foundation"),
+            searchFoodsByType(query, "SR Legacy"),
+            searchFoodsByType(query, "Survey (FNDDS)"),
+            searchFoodsByType(query, "Branded"),
+        ]);
+        foods = [
+            ...foundationFoods,
+            ...legacyFoods,
+            ...surveyFoods,
+            ...brandedFoods,
+        ].slice(0, 12);
     }
 
-
-
-    const [foundationFoods, legacyFoods, surveyFoods, brandedFoods] = await Promise.all([
-        searchFoodsByType(query, "Foundation"),
-        searchFoodsByType(query, "SR Legacy"),
-        searchFoodsByType(query, "Survey (FNDDS)"),
-        searchFoodsByType(query, "Branded"),
-    ]);
-
-    const foods = [
-        ...foundationFoods,
-        ...legacyFoods,
-        ...surveyFoods,
-        ...brandedFoods,
-    ].slice(0, 12);
-
-    if (!foods || foods.length === 0) {
-        return (
-
-            <>
-                <SearchFood />
-                <p>No results found.</p>
-            </>
-        );
-    }
-
+    
     return (
         <div className={styles.searchResults}>
             <SearchFood />
-            {query &&
+            {query && foods &&
                 <>
                     <Suspense fallback={<h3>Loading...</h3>}>
                         <ul>

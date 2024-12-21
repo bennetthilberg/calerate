@@ -89,11 +89,10 @@ export default function ResultAddServing({ food }) {
                 <Dialog.Content
                     asChild
                     aria-describedby={undefined}
-                    className="dialogContent"
                 >
-                    <form className={styles.content} onSubmit={e => handleLog(e)}>
+                    <form className={`dialogContent ${styles.content}`} onSubmit={e => handleLog(e)}>
                         <Dialog.Close asChild>
-                            <button className={styles.closeButton}>
+                            <button className="dialogCloseButton">
                                 <Cross1Icon />
                             </button>
                         </Dialog.Close>
@@ -114,17 +113,18 @@ export default function ResultAddServing({ food }) {
                         </span>
                         <button
                             data-available={logOk}
-                            className={styles.logButton}
-                            type="submit">
+                            className={`primary ${styles.logButton}`}
+                            type="submit"
+                            >
                             {
-                                adding && <ClipLoader className={styles.spinner} speedMultiplier={1.4} color="blue" size={21.25} />
-                            }
-                            {
-                                success && <CheckIcon color="green" className={styles.checkIcon} />
-                            }
-                            {
-                                !adding && !success && 'Log'
-                            }
+                                    adding && <ClipLoader className={styles.spinner} speedMultiplier={1.4} color="white" size={24} />
+                                }
+                                {
+                                    success && <CheckIcon color="white" className={styles.checkIcon} />
+                                }
+                                {
+                                    !adding && !success && <><img className={styles.plusIcon} src="/plus-icon-white.svg" /><span className={styles.saveText}>Log</span></>
+                                }
                         </button>
                     </form>
                 </Dialog.Content>

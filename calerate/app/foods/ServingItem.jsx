@@ -69,7 +69,7 @@ export default function ServingItem({ serving }) {
         e.preventDefault();
         console.log('Delete serving');
         setDeleting(true);
-        
+
         const res = await fetch('/api/delete-serving', {
             method: 'DELETE',
             body: JSON.stringify({ serving }),
@@ -101,10 +101,10 @@ export default function ServingItem({ serving }) {
                     <h3 className={styles.servingName}>{serving.name}</h3>
                     {
                         serving.fdc_id == 0 ?
-                        <p className={styles.amount}><span className={styles.caloriesText}>{Math.round(serving.calories)} calories</span></p> :
-                        <p className={styles.amount}>{serving.amount}{serving.amount_unit} - <span className={styles.caloriesText}>{Math.round(serving.calories)} calories</span></p>
+                            <p className={styles.amount}><span className={styles.caloriesText}>{Math.round(serving.calories)} calories</span></p> :
+                            <p className={styles.amount}>{serving.amount}{serving.amount_unit} - <span className={styles.caloriesText}>{Math.round(serving.calories)} calories</span></p>
                     }
-                    
+
                 </div>
             </Dialog.Trigger>
             <Dialog.Portal>
@@ -127,13 +127,18 @@ export default function ServingItem({ serving }) {
 
                         </p>
                         <span className={styles.addInputHolder}>
-                            <input type="tel"
-                                value={servingSizeValue}
-                                autoFocus
-                                onChange={e => handleServingSizeChange(e)}
-                                maxLength={6}
-                            />
-                            <span>g</span>
+                            {
+                                serving.fdc_id != 0 &&
+                                <>
+                                    <input type="tel"
+                                        value={servingSizeValue}
+                                        autoFocus
+                                        onChange={e => handleServingSizeChange(e)}
+                                        maxLength={6}
+                                    />
+                                    <span>g</span>
+                                </>
+                            }
                         </span>
                         <div className={styles.actions}>
                             <span className={styles.delete} onClick={(e) => handleDelete(e)}>
@@ -146,7 +151,7 @@ export default function ServingItem({ serving }) {
                                 {
                                     deleteSuccess && <CheckIcon color="green" className={styles.deleteCheckIcon} />
                                 }
-                                
+
                                 <span className={styles.deleteText}>Delete</span>
                             </span>
                             <button

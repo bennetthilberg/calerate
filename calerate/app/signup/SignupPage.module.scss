@@ -92,10 +92,9 @@ form.signUpForm {
 
         &[data-error="true"] {
             margin-top: 0;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             color: $lightRed;
         }
-
         transition: margin 0.08s ease-out,
         height 0.08s ease-out;
     }

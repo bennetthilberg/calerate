@@ -80,7 +80,31 @@ export default async function Foods() {
                         goal
                     </p>
                 </div>
-                : <h2>{today?.total_calories ?? 0} calories consumed</h2>
+                : 
+                <div className={styles.caloriesLeftDisplay}>
+                    <h2 className={styles.remaining}>
+                        Set a goal to track calories
+                    </h2>
+                    <div className={styles.meterContainer}>
+                        <div
+                            className={styles.meterFill}
+                            style={{
+                                width: `0%`,
+                                backgroundColor: `hsl(120, 70.30%, 44.90%)`
+                            }}
+                        />
+                    </div>
+                    <p className={styles.figuresText}>
+                        <span>
+                            {`${today?.total_calories ?? 0} `}
+                        </span>
+                        consumed of
+                        <span>
+                            {` ${today.goal_calories ?? 0} `}
+                        </span>
+                        goal
+                    </p>
+                </div>
             }
             <div className={styles.buttonsHolder}>
                 <AddMiscCalories />

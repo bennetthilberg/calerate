@@ -3,7 +3,8 @@ import SubNav from "./components/(SubNav)/SubNav";
 import ActionBar from "./components/ActionBar/ActionBar";
 import "./globals.scss";
 import { createClient } from "@/utils/supabase/server";
-import {Open_Sans} from 'next/font/google'
+import { Open_Sans } from 'next/font/google'
+import PwaReminder from "./components/PwaReminder/PwaReminder";
 
 
 
@@ -22,10 +23,18 @@ export default async function RootLayout({ children, searchParams }) {
   const query = searchParams?.query ?? "";
   return (
     <html lang="en">
+      <head>
+        <link rel="manifest" href="manifest.json" />
+        <link rel="icon" href="/icon-128.png" />
+        <link rel="apple-touch-icon" href="/icon-128.png" />
+      </head>
       <body className={openSans.className}>
-        <NavBar />
-        {children}
-        {user && <ActionBar />}
+        <PwaReminder />
+        <div className="app">
+          <NavBar />
+          {children}
+          {user && <ActionBar />}
+        </div>
       </body>
     </html>
   );

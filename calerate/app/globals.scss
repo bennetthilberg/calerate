@@ -91,6 +91,9 @@ h6 {
         line-height: 25px;
     }
 }
+.dialogContent, .overlay{
+    z-index: 9998;
+}
 
 .dialogCloseButton {
     position: absolute;
@@ -148,4 +151,39 @@ button.danger {
     background-color: $lightRed;
     box-shadow: inset 0 1px 0 lighten($lightRed, 3%), 0 1px 3px hsla(0, 0%, 0%, 0.2);
     color: white;
+}
+
+.desktop{
+    display: none;
+}
+
+@media screen and (min-width: 460px) {
+    .pwaInstructions{
+        display: none !important;
+    }
+    .desktop{
+        display: block;
+        background-color: $p5;
+        width: 500px;
+        height: 48px;
+        color: white;
+        border-radius: 8px;
+        margin: 2px auto;
+        p{
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            line-height: 48px;
+            font-size: 17px;
+            font-weight: 500;
+        }
+    }
+    .app{
+        margin-left: auto;
+        margin-right: auto;
+        width: 460px;
+        border-radius: 8px;
+        padding: 4px;
+        position: relative;
+    }
 }

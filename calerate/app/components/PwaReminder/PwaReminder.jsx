@@ -14,7 +14,7 @@ export default function PwaReminder() {
         } else {
             setStandalone(false);
         }
-    })
+    },[]);
     return (
         <div className="pwaReminder">
             <div className="desktop">
@@ -29,7 +29,7 @@ export default function PwaReminder() {
                             Welcome to Calerate!
                         </h3>
                         <p>
-                            Add Calerate to your home screen to use it like an app. Here's how:
+                            Add Calerate to your home screen to use it like an app. Here&apos;s how:
                         </p>
                     </div>
                     <Tabs.Root className={styles.tabsBox} defaultValue="iOS">

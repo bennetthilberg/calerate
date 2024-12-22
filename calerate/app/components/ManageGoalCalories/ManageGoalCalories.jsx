@@ -68,7 +68,7 @@ export default function ManageGoalCalories({goalCalories, totalCalories }) {
                 <Dialog.Content className={`dialogContent ${styles.content}`}>
                     <VisuallyHidden.Root>
                         <Dialog.Title>Manage goal calories</Dialog.Title>
-                        <Dialog.Description>Add or edit today's calore goal</Dialog.Description>
+                        <Dialog.Description>Add or edit today&apos;s calore goal</Dialog.Description>
                     </VisuallyHidden.Root>
                     <h2>
                         {goalCalories ? "Edit" : "Select"} your daily calorie goal

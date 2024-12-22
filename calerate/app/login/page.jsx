@@ -83,7 +83,7 @@ export default function LoginPage() {
           }
       </button>
       <div className={styles.registerRow}>
-        <span>Don't have an account?</span>
+        <span>Don&apos;t have an account?</span>
         <button onClick={e => handleSignup(e)} className="secondary">
           Sign up
         </button>

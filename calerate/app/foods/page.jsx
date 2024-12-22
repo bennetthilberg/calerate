@@ -16,7 +16,7 @@ async function getTodayAndServings() {
     const userData = await supabase.auth.getUser();
     const user = userData.data.user;
     if (!user) return [null, null];
-    // get today's day row
+    // get today&apos;s day row
     const { data: daysData } = await supabase
         .from('days')
         .select('*')
@@ -24,7 +24,7 @@ async function getTodayAndServings() {
         .eq('date', new Date().toISOString().split('T')[0]);
     const today = await getOrCreateToday();
     
-    // get today's servings
+    // get today&apos;s servings
     const { data: servingsData } = await supabase
         .from('servings')
         .select('*')
@@ -39,7 +39,7 @@ export default async function Foods() {
 
     return (
         <div className={styles.foods}>
-            <h1>Today's Foods</h1>
+            <h1>Today&apos;s Foods</h1>
             <p className={styles.dateText}>
                 <span>
                     {new Intl.DateTimeFormat('en-US', {

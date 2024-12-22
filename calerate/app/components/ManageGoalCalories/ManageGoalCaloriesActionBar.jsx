@@ -76,10 +76,10 @@ export default function ManageGoalCaloriesActionBar({ goalCalories, totalCalorie
                             </button>
                         </Dialog.Close>
                         <VisuallyHidden.Root>
-                            <Dialog.Description>Add or edit today's calore goal</Dialog.Description>
+                            <Dialog.Description>Add or edit today&apos;s calore goal</Dialog.Description>
                         </VisuallyHidden.Root>
                         <Dialog.Title>{goalCalories ? "Edit" : "Select"} your calorie goal</Dialog.Title>
-                        <label>Today's goal:</label>
+                        <label>Today&apos;s goal:</label>
                         <div className={styles.goalInputHolder}>
                             <input type="tel" maxLength={4} autoFocus value={goal} onChange={e => handleGoalChange(e)} />
                             <span>calories</span>

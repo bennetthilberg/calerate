@@ -10,7 +10,7 @@ export default function SubNav() {
             <SearchFood />
             <Link href="/foods" prefetch={true} className={styles.todayLink}>
                 <span>
-                    Today's
+                    Today&apos;s
                 </span>
                 <span>
                     Foods

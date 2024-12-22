@@ -67,7 +67,7 @@ export default function SignUpPage() {
         <form className={styles.signUpForm}>
             <h2>Create your account</h2>
             <p>
-                Welcome! Let's set up your account
+                Welcome! Let&apos;s set up your account
             </p>
 
             <label htmlFor="email">Email</label>

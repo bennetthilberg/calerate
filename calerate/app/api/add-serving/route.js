@@ -49,7 +49,7 @@ export async function POST(req) {
         if (servingError) throw servingError;
 
 
-        // update today's total calories
+        // update today&apos;s total calories
         /*
         const currentCalories = today.total_calories ?? 0;
         const { data: updatedDayData, error: updatedDayError } = await supabase

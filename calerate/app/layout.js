@@ -24,7 +24,7 @@ export default async function RootLayout({ children, searchParams }) {
   return (
     <html lang="en">
       <head>
-        <link rel="manifest" href="manifest.json" />
+        <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/icon-128.png" />
         <link rel="apple-touch-icon" href="/icon-128.png" />
       </head>

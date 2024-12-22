@@ -4,7 +4,7 @@
     "start_url": "/foods",
     "display": "standalone",
     "background_color": "hsl(197 100% 98%)",
-    "theme_color": "hsl(197 80% 34%)",
+    "theme_color": "$p10: hsl(197 100% 99%);",
     "icons": [
     {
       "src": "/icon-192.png",

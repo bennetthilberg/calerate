@@ -13,7 +13,7 @@ export const metadata = {
   description: "Free, snappy calorie tracking",
 };
 
-const openSans = Open_Sans();
+const openSans = Open_Sans({subsets: ['latin']});
 
 
 export default async function RootLayout({ children, searchParams }) {
